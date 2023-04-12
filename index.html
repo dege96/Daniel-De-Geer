@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">     -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="#">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Daniel De Geer</title>
+</head>
+<body>
+<div id="loading"></div>
+<div id="particles-js"></div> <!-- PARTIKLAR -->
+<header>
+    <div class="header-container">
+        <h2 class="Title" id="AboutTitle"><span>About</span></h2>
+        <h2 class="Title" id="CollectionTitle"><span>Collection</span></h2>
+        <h2 class="Title" id="ContactTitle"><span>Contact</span></h2>
+    </div>
+</header>
+
+<div id="AboutPage">
+<!--     <div>
+        <h1 class="title">Daniel De Geer</h1>
+        <h2 class="title" id="orangetext">3D Artist / 3D Modeler</h2>
+        <div class="textbox1">
+            <h3 class="subtitle">
+                Experienced 3D artist with a deep understanding of the principles of design.
+            </h3>
+        </div>
+    </div> -->
+    <div id="DanielDeGeer"><img src="PNGs/Text1.png"></div>
+</div>
+
+<div id="CollectionPage">
+    <div class="scrollable-container">
+        <img src="PNGs/Gun1.png" class="scrollable-item" id="bild1">
+        <img src="PNGs/skepp2.png" class="scrollable-item" id="bild2">
+        <img src="PNGs/spoder.png" class="scrollable-item" id="bild3">
+        <!-- Add more images as needed -->
+      </div>
+
+    </div>
+</div>
+
+<div id="ContactPage">
+    <h1 id="contact_text">CONTACT</h1>
+    <hr>
+    <p>Daniel De Geer</p>
+    <p>072-4487024</p>
+    <a href="mailto:danieldegeer92@gmail.com">danieldegeer92@gmail.com</a>
+</div>
+
+<div>
+    <div id="Grid1"><img src="PNGs/Asset 3.svg" alt="Asset3"></div>
+</div>
+
+<div id="wrapper2">
+
+
+<div class="accordions">
+<accordion-menu id="Bild2Accordion">
+    <accordion-item title="Details">
+        <p>A submachine gun, also known as an SMG, is a lightweight, portable firearm that is designed to fire pistol cartridges in rapid succession. It is typically used in close-quarters combat or as a backup weapon for military personnel and law enforcement officers.
+        </p>
+    </accordion-item>
+    <accordion-item title="Material">
+        <p>- Steel<br>
+            - Aluminum<br>
+            - Polymer<br>
+        </p>
+    </accordion-item>
+    <accordion-item title="Cost">
+        <p>3 billion dollars</p>
+    </accordion-item>
+</accordion-menu>
+
+<accordion-menu id="Bild1Accordion">
+    <accordion-item title="Details">
+        <p>Enjoy crisp COLA, delicious taste with meals, on the go, or to share. 
+            Serve ice cold for maximum refreshment.</p>
+    </accordion-item>
+    <accordion-item title="Armour">
+        <p>- Carbonated water<br>
+            - High fructose corn syrup<br>
+            - Caramel color<br>
+            - Phosphoric acid<br>
+            - Caffeine</p>
+    </accordion-item>
+    <accordion-item title="Velocity">
+        <p>35g Carbs<br>
+        142 Calories</p>
+    </accordion-item>
+</accordion-menu>
+</div>
+
+<canvas class="testCanvas" id="testCanvas"></canvas> 
+<h2 class="top" id="title"></h2>
+
+<div class="infoBox" id="infoBox">
+    <div class="infoBoxText">
+        <h2> </h2>
+        <p id="p1"> </p>
+        <p id="p2"> </p>
+        <div class="textcontainer1">
+            <div id="p3">
+                <h4></h4>
+              </div>
+            </div>
+
+          </div>
+
+    </div>
+</div>
+
+</div>
+
+
+
+</body>
+<script src="particles.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/paulmasson/threejs-with-controls@r121/build/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+<script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.114.0/examples/js/loaders/RGBELoader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/TextPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/EasePack.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="anime.min.js"></script>
+<script src="accordion.js"></script> <!-- Web component 1 (Interaktiv) -->
+<script src="Loading1.js" ></script>  <!-- Web component 2 -->
+<script src="Button1.js"></script>  <!-- Web component 3 (Interaktiv) -->
+<script src="script.js"></script>
+</html>
