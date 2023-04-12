@@ -176,7 +176,6 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 50vh;
   animation: fadeIn 2s;
 }
 
@@ -206,7 +205,9 @@ h3 {
       margin: 10px 0; /* add some margin to the text */
   }
 
-#wrapper2 {
+#GlbWrapper {
+  height: 100vh;
+  width: 100vw;
   display: none;
   transition: opacity 1s;
   justify-content: center;
@@ -215,7 +216,7 @@ h3 {
 }
 
 * {
-  margin: 0;
+  margin: 10;
   padding: 0;
   box-sizing: border-box;
 }
@@ -253,14 +254,19 @@ h3 {
 }
 
 .top {
-  background-color: transparent;
   color: white;
   font-family: "Lato", sans-serif;
-  font-size: 1.2rem;
   justify-content: center;
   align-items: center;
+
   margin: auto;
   margin-top: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 3.5rem;
 }
 
 .Title {
@@ -268,18 +274,6 @@ h3 {
   margin-left: 15vw;
   margin-right: 15vw;
   text-align: center;
-  cursor: pointer;
-}
-
-#title {
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20%;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 3.5rem;
   cursor: pointer;
 }
 
@@ -292,23 +286,21 @@ accordion-menu{
 }
 
 #Bild1Accordion{
+  opacity: 0;
   transition: opacity 1s, transform 1s;
-  transform: translateY(-50vw);
 }
 
 #Bild2Accordion{
+  opacity: 0;
   transition: opacity 1s, transform 1s;
-  transform: translateY(+50vw);
 }
 
 #Bild1Accordion.show {
   opacity: 1;
-  transform: translateY(0);
 }
 
 #Bild2Accordion.show {
   opacity: 1;
-  transform: translateY(0);
 }
 
 li {
@@ -338,7 +330,6 @@ li {
 }
 
 #bild {
-
   transition: opacity 1s, transform 0.4s;
   transition-delay: 200ms;
   cursor: pointer;
@@ -359,37 +350,10 @@ li {
   list-style: none;
 }
 
-.infoBox {
-  position: absolute;
-  text-align: center;
-  font-family: "Lato", sans-serif;
-  left: 75%;
-  top: 49%;
-  transform: translate(-40%, -20%);
-  font-weight: normal;
-  color: white;
-
-  border-radius: 20px;
-  z-index: 2;
-  opacity: 0;
-  min-width: 30vw;
-}
-
 #spacebaricon {
   opacity: 0;
   margin: 2%;
   width: 40%;
-}
-.infoBox h1 {
-  color: white;
-  font-size: 2.5rem;
-  margin: 1rem;
-}
-
-.infoBox p {
-  color: white;
-  font-size: 1.5rem;
-  margin: 1rem;
 }
 
 .mitten {
@@ -414,16 +378,4 @@ height: 100vh;
 left: -30vw;
 top: 70vh;
 transform: rotate(-6deg) scale(1.5);
-}
-
-#Asset2{
-  z-index: 0;
-  transform: rotate(0deg) scale(0.7);
-  position: absolute;
-  text-align: center;
-  margin: auto;
-  left: -800px;
-  top: -500px;
-  mix-blend-mode: hard-light;
-  opacity:0.05 ;
 }

@@ -4,119 +4,12 @@ const ContactTitle = document.querySelector('#ContactTitle');
 const AboutPage = document.getElementById('AboutPage');
 const CollectionPage = document.getElementById('CollectionPage');
 const ContactPage = document.getElementById('ContactPage');
-const GlbWrapper =  document.getElementById('wrapper2');
+const GlbWrapper =  document.getElementById('GlbWrapper');
 
 const Bild1 =  document.getElementById('bild1');
 const Bild2 =  document.getElementById('bild2');
 const Bild3 =  document.getElementById('bild3');
 const title = document.querySelector('#title');
-
-/* particlesJS("particles-js", {
-  particles: {
-    number: {
-      value: 3,
-      density: {
-        enable: true,
-        value_area: 80
-      }
-    },
-    color: {
-      value: "#ffffff"
-    },
-    shape: {
-      type: "rectangle",
-      stroke: {
-        width: 0,
-        color: "#000000"
-      },
-      polygon: {
-        nb_sides: 20
-      }
-    },
-    opacity: {
-      value: 2,
-      random: false,
-      anim: {
-        enable: false,
-        speed: 0.2,
-        opacity_min: 0.1,
-        sync: false
-      }
-    },
-    size: {
-      value: 6,
-      random: true,
-      anim: {
-        enable: false,
-        speed: 40,
-        size_min: 0.1,
-        sync: false
-      }
-    },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: "#ffffff",
-      opacity: 1,
-      width: 1
-    },
-    move: {
-      enable: true,
-      speed: 6,
-      direction: "none",
-      random: false,
-      straight: false,
-      out_mode: "out",
-      bounce: false,
-      attract: {
-        enable: false,
-        rotateX: 600,
-        rotateY: 1200
-      }
-    }
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: {
-      onhover: {
-        enable: true,
-        mode: "repulse"
-      },
-      onclick: {
-        enable: true,
-        mode: "push"
-      },
-      resize: true
-    },
-    modes: {
-      grab: {
-        distance: 400,
-        line_linked: {
-          opacity: 1
-        }
-      },
-      bubble: {
-        distance: 400,
-        size: 40,
-        duration: 2,
-        opacity: 8,
-        speed: 3
-      },
-      repulse: {
-        distance: 100,
-        duration: 0.4
-      },
-      push: {
-        particles_nb: 4
-      },
-      remove: {
-        particles_nb: 2
-      }
-    }
-  },
-  retina_detect: true
-}); */
-
 
 //Klicka collection title
 CollectionTitle.addEventListener('click', (event) => {
@@ -126,7 +19,6 @@ CollectionTitle.addEventListener('click', (event) => {
   CollectionPage.style.display = 'flex';
   GlbWrapper.style.display = "none";
   //ContactPage.classList.add('show');
-
 });
 
 //Klicka collection title
@@ -148,7 +40,7 @@ ContactTitle.addEventListener('click', (event) => {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+/* document.addEventListener('DOMContentLoaded', function() {
   const titleElements = document.querySelectorAll('.header-container .title');
 
   titleElements.forEach(function(title) {
@@ -159,49 +51,26 @@ document.addEventListener('DOMContentLoaded', function() {
       title.classList.add('active'); // Add the active class to the clicked title
     });
   });
-});
+}); */
 
 function canSelect(){
 
   const Bild2Accordion = document.querySelector('#Bild2Accordion');
   const Bild1Accordion = document.querySelector('#Bild1Accordion');
-  const burkbilder = document.querySelector('#bild'); 
 
-  // initiera variabler
-  let image = document.getElementsByTagName("img")[0]; //Standardbild
-
-  const itemCards = document.querySelectorAll('.item-card');
-  const Gun1 = document.getElementById('SubmachineGun');
-
-function easeOutCallTHREE(element){
-  CollectionPage.style.display = 'none';
-  console.log(element)
-    anime({
-      targets: element,
-      opacity: 0,
-      easing: 'easeOutExpo',
-      duration: 1000,
-      complete: () => {
-        transitionToThreeJS(element, "Gun1.glb", "Gun1")
-      }
-    })
-}
 }
 
 //Lägg till fler för varje bild
 Bild1.addEventListener('click', () => showThreeJS('Gun1.glb', 'Sniper Rifle', 20));
 Bild2.addEventListener('click', () => showThreeJS('Ship_Triangulated.glb', 'The Celestial Voyager', 10));
 
-
+//Lägger till glb beroende på bild klickad
 function showThreeJS(glbLocation, title, scale) {
   CollectionPage.style.display = 'none';
-  GlbWrapper.style.display = 'flex';
-
-  // create a new h1 element for the title
-edit_title = document.getElementById("title")
-edit_title.textContent = title;
-
-  ScaleSet = scale; //Ändrar inte
+  GlbWrapper.style.display = 'block';
+  edit_title = document.getElementById("title")
+  edit_title.textContent = title;
+  ScaleSet = scale;
   console.log(ScaleSet);
   ElementLocation = glbLocation;
   document.querySelector('#loading').style.display = "block";
@@ -209,7 +78,6 @@ edit_title.textContent = title;
   Bild2Accordion.classList.add('show');
   ThreeJS(ElementLocation, glbLocation, ScaleSet);
 }
-
 
 function ThreeJS(element, SelectedElement, ScaleSet){
   async function main() {
@@ -222,10 +90,8 @@ function ThreeJS(element, SelectedElement, ScaleSet){
       Mesh1.position.y = 0;
       Mesh1.position.x = 0;
       Mesh1.name = SelectedElement;
-      Mesh1.material = new THREE.MeshPhongMaterial({color: 0xffffff, shininess: 100, specular: 0xffffff, flatShading: true});
       scene.add(Mesh1);
       console.log(Mesh1);
-      //Mesh1.material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
       const light = new THREE.PointLight(0xffffff, 1, 100);
       light.position.set(0, 0, 10);
       scene.add(light);
@@ -234,9 +100,6 @@ function ThreeJS(element, SelectedElement, ScaleSet){
       console.log('GLTF model not loaded');
     }
   
-
-
-    // Tona i toppfältet, används med openingAnimation()
     MakeBackgroundScene();
     setUpEventListeners();
     animate();
@@ -255,7 +118,6 @@ function ThreeJS(element, SelectedElement, ScaleSet){
   // Ställ in scenen, kameran och renderaren
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000);
-  scene.fog = new THREE.Fog( 0x111111, 150, 200 );
   const renderer = new THREE.WebGLRenderer({ canvas: testCanvas, antialias: true, alpha: true});
   renderer.setSize(sizes.width, sizes.height);
   renderer.outputEncoding = THREE.sRGBEncoding;
@@ -273,7 +135,7 @@ function ThreeJS(element, SelectedElement, ScaleSet){
   
   // Kameraposition
   camera.position.set(0, 50, 100);
-  camera.lookAt(scene.position); //add this line
+  camera.lookAt(scene.position);
   
   // Ställ in "controllers"
   const controls = new THREE.OrbitControls(camera, testCanvas);
@@ -282,8 +144,6 @@ function ThreeJS(element, SelectedElement, ScaleSet){
   controls.enableZoom = false;
   controls.autoRotate = true;
   controls.autoRotateSpeed = spinSpeed;
-  //controls.minPolarAngle = 75 * Math.PI/180;
-  //controls.maxPolarAngle = 100 * Math.PI/180;
   
   //HDRi
   function MakeBackgroundScene(element){
@@ -400,7 +260,6 @@ function ThreeJS(element, SelectedElement, ScaleSet){
     }
   }
   
-
   function changeProperties() {
     // Skapa en tidslinje för objektanimering
     const tl = gsap.timeline({ defaults: { ease: "power3.easeInOut" } });
@@ -414,7 +273,6 @@ function ThreeJS(element, SelectedElement, ScaleSet){
   }
 
   function animateDisappear(currentObject, NoncurrentObject) {
- 
   
     controls.autoRotate = false;
   
