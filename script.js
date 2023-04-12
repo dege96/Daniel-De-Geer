@@ -190,8 +190,8 @@ function easeOutCallTHREE(element){
 
 //Lägg till fler för varje bild
 Bild1.addEventListener('click', () => showThreeJS('Gun1.glb', 'Sniper Rifle', 20));
-Bild2.addEventListener('click', () => showThreeJS('Ship_Triangulated.glb', 'Spaceship', 10));
-Bild3.addEventListener('click', () => showThreeJS('Ship_Triangulated.glb', 'Spaceship', 20));
+Bild2.addEventListener('click', () => showThreeJS('Ship_Triangulated.glb', 'The Celestial Voyager', 10));
+Bild3.addEventListener('click', () => showThreeJS('Ship_Triangulated.glb', 'The Celestial Voyager', 10));
 
 function showThreeJS(glbLocation, title, scale) {
   CollectionPage.style.display = 'none';
