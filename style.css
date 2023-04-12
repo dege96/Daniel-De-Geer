@@ -120,7 +120,7 @@ h3 {
 .scrollable-container {
   display: flex;
   gap: 10px;
-  z-index: 2;
+  z-index: 6;
   display: flex;
   flex-wrap: nowrap;
   margin-top: 30vh;
@@ -130,6 +130,7 @@ h3 {
 }
 
 .scrollable-item {
+  z-index: 6;
   max-width: 20%;
   height: 30vh;
   width: 70vh;
@@ -337,6 +338,7 @@ li {
 }
 
 #bild {
+
   transition: opacity 1s, transform 0.4s;
   transition-delay: 200ms;
   cursor: pointer;
