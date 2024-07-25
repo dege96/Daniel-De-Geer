@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">     -->
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="#">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -12,7 +11,7 @@
     <title>Victor De Geer</title>
 </head>
 <body>
-<div id="loading"></div>
+
 <header>
     <div class="header-container">
         <h2 class="Title" id="AboutTitle"><span>About</span></h2>
@@ -21,34 +20,51 @@
     </div>
 </header>
 
+<div class="background"></div> <!-- Background image -->
+
+<!-- About Page section -->
 <div id="AboutPage">
+        <img src="PNGs/vdgwhiteorange.png" id="vdgwhiteorange" alt="vdgwhiteorange">
 </div>
 
+<!-- CollectionPage section -->
 <div id="CollectionPage">
-    <div class="scrollable-container">
-        <img src="PNGs/rockstar8.1.png" class="scrollable-item" id="bild1">
-        <img src="PNGs/terran.jpg" class="scrollable-item" id="bild2">
-        <mp4 src="PNGs/search1.mp4" class="scrollable-item" id="bild3">
-        <!-- Add more images as needed -->
-      </div>
-
+  <div class="scrollable-container">
+    <div class="scrollable-item-container">
+      <img src="PNGs/rockstar8.1.png" class="scrollable-item" id="bild1" alt="Rockstar Design"></img>
+      <div class="text-overlay">Image design</div>
     </div>
+
+    <div class="scrollable-item-container">
+      <img src="PNGs/terran.png" class="scrollable-item" id="bild2" alt="Web Design"></img>
+      <div class="text-overlay">Web design</div>
+    </div>
+    <div class="scrollable-item-container">
+        <video src="PNGs/search.mp4" class="scrollable-item" id="bild3" autoplay loop muted></video>
+        <div class="text-overlay">Animation</div>
+    </div>
+
+    <div class="scrollable-item-container">
+        <video src="PNGs/danieldege.mp4" class="scrollable-item" id="bild4" autoplay loop muted></video>
+        <div class="text-overlay">Web programming</div>
+    </div>
+
+    <div class="scrollable-item-container">
+        <iframe src="https://open.spotify.com/embed/track/6PdGPH9fZEpUlRyHv7ztTU?utm_source=generator" id="musikbild" class="scrollable-item" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="text-overlay">Music production</div>
+    </div>
+  
+
+  </div>
 </div>
 
 <div id="ContactPage">
     <h1 id="contact_text">CONTACT</h1>
-    <hr>
+    <p> </p>
     <p>Victor De Geer</p>
     <p>076-1914617</p>
     <a href="mailto:victordegeer96@gmail.com">victordegeer96@gmail.com</a>
 </div>
-
-<div>
-    <div id="Grid1"><img src="PNGs/Asset 3.svg" alt="Asset3"></div>
-</div>
-
-<div id="GlbWrapper">
-
 
 <div class="accordions">
 
@@ -71,50 +87,8 @@
     </accordion-menu>
     </div>
 
-<accordion-menu id="Bild2Accordion">
-    <accordion-item title="Details">
-        <p>The Celestial Voyager is powered by a hybrid propulsion system that combines advanced nuclear 
-            fusion technology and ion thrusters. This system allows the spacecraft to achieve impressive 
-            speeds while maintaining fuel efficiency and minimizing the emission of harmful by-products.
-        </p>
-    </accordion-item>
-    <accordion-item title="Material">
-        <p>- Steel<br>
-            - Aluminum<br>
-            - Polymer<br>
-        </p>
-    </accordion-item>
-    <accordion-item title="Specifications">
-        <p>Length: 450 meters<br>
-            Width: 150 meters<br>
-            Height: 120 meters<br>
-            Mass: 250,000 metric tons<br>
-            Crew capacity: 150<br>
-            Maximum speed: 0.1c (10% the speed of light)</p>
-    </accordion-item>
-</accordion-menu>
 
-<canvas class="testCanvas" id="testCanvas"></canvas> 
 <h2 class="top" id="title"></h2>
-
-<div class="infoBox" id="infoBox">
-    <div class="infoBoxText">
-        <h2> </h2>
-        <p id="p1"> </p>
-        <p id="p2"> </p>
-        <div class="textcontainer1">
-            <div id="p3">
-                <h4></h4>
-              </div>
-            </div>
-
-          </div>
-
-    </div>
-</div>
-
-</div>
-
 
 
 </body>
@@ -129,7 +103,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="anime.min.js"></script>
 <script src="accordion.js"></script> <!-- Web component 1 (Interaktiv) -->
-<script src="Loading1.js" ></script>  <!-- Web component 2 -->
 <script src="Button1.js"></script>  <!-- Web component 3 (Interaktiv) -->
 <script src="script.js"></script>
 </html>

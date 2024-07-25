@@ -11,21 +11,11 @@ const Bild2 = document.getElementById('bild2');
 const Bild3 = document.getElementById('bild3');
 const title = document.querySelector('#title');
 
-document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_00051.jpg')`;
+//document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_00051.jpg')`;
 
 const images = [];
-const totalImages = 69 - 32 + 1;
+const totalImages = 38;
 let isPreloaded = false;
-
-//storlek på bilder
-[Bild1, Bild2, Bild3].forEach(bild => {
-  bild.addEventListener('mouseover', () => {
-    gsap.to(bild, { scale: 1.05, duration: 0.5, ease: 'power3.out' });
-  });
-  bild.addEventListener('mouseout', () => {
-    gsap.to(bild, { scale: 1, duration: 0.5, ease: 'power3.out' });
-  });
-});
 
 // Preload images
 function preloadImages() {
@@ -47,6 +37,49 @@ function preloadImages() {
 
 // Call preloadImages when the page loads
 window.onload = preloadImages;
+
+// Function to remove images from the array
+function removeImages() {
+  images.forEach(img => {
+    img.src = ''; // Clear image source to free up memory
+  });
+  images.length = 0; // Clear the array
+  isPreloaded = false; // Optionally reset preload status
+  document.body.style.backgroundImage = ''; // Clear background image
+  console.log("Images removed from array.");
+}
+
+
+// Navigation event handlers
+CollectionTitle.addEventListener('click', () => {
+  console.log('You clicked the Collection Title!');
+  AboutPage.style.display = 'none';
+  ContactPage.style.display = 'none';
+  CollectionPage.style.display = 'flex';
+
+  
+  removeImages(); // Remove images when switching to Collection Page
+});
+
+AboutTitle.addEventListener('click', () => {
+  console.log('You clicked the About Title!');
+  ContactPage.style.display = 'none';
+  CollectionPage.style.display = 'none';
+  AboutPage.style.display = 'flex';
+
+  removeImages(); // Remove images when switching to About Page
+});
+
+ContactTitle.addEventListener('click', () => {
+  console.log('You clicked the Contact Title!');
+  AboutPage.style.display = 'none';
+  CollectionPage.style.display = 'none';
+  ContactPage.style.display = 'flex';
+
+  
+  removeImages(); // Remove images when switching to Contact Page
+});
+
 
 // Throttle function to limit how often a function can be executed
 function throttle(func, limit) {
@@ -158,7 +191,7 @@ document.querySelector('#CollectionTitle').addEventListener('click', () => {
   document.getElementById('AboutPage').style.display = 'none';
   document.getElementById('ContactPage').style.display = 'none';
   document.getElementById('CollectionPage').style.display = 'flex';
-  document.getElementById('GlbWrapper').style.display = "none";
+
 });
 
 document.querySelector('#AboutTitle').addEventListener('click', () => {
@@ -166,7 +199,7 @@ document.querySelector('#AboutTitle').addEventListener('click', () => {
   document.getElementById('ContactPage').style.display = 'none';
   document.getElementById('CollectionPage').style.display = 'none';
   document.getElementById('AboutPage').style.display = 'flex';
-  document.getElementById('GlbWrapper').style.display = "none";
+
 });
 
 document.querySelector('#ContactTitle').addEventListener('click', () => {
@@ -174,5 +207,5 @@ document.querySelector('#ContactTitle').addEventListener('click', () => {
   document.getElementById('AboutPage').style.display = 'none';
   document.getElementById('CollectionPage').style.display = 'none';
   document.getElementById('ContactPage').style.display = 'flex';
-  document.getElementById('GlbWrapper').style.display = "none";
+
 });
