@@ -11,6 +11,8 @@ const Bild2 =  document.getElementById('bild2');
 const Bild3 =  document.getElementById('bild3');
 const title = document.querySelector('#title');
 
+document.body.style.backgroundImage = `url('/PNGs/fbf/Comp 1/bounce_word_framebyframe_00051.jpg')`;
+
 const totalImages = 69 - 32 + 1;
 const images = [];
 let isPreloaded = false;
@@ -70,16 +72,23 @@ function updateBackgroundDesktop(event) {
 
 // Update background image based on device tilt (mobile)
 function updateBackgroundMobile(event) {
-    if (!isPreloaded) return;
+  if (!isPreloaded) return; // Exit if images are not yet preloaded
 
-    const rotation = event.gamma; // gamma represents left-right tilt
-    let imageIndex = Math.floor(((rotation + 90) / 180) * totalImages) + 32;
+  const rotation = event.gamma; // gamma represents the left-to-right tilt in degrees
+  let imageIndex = Math.floor(((rotation + 90) / 180) * totalImages) + 32;
 
-    // Ensure imageIndex is within bounds
-    imageIndex = Math.max(32, Math.min(imageIndex, 69));
+  // Ensure imageIndex is within bounds
+  if (imageIndex < 32) {
+      imageIndex = 32;
+  } else if (imageIndex > 69) {
+      imageIndex = 69;
+  }
 
-    const paddedIndex = String(imageIndex).padStart(5, '0');
-    document.body.style.backgroundImage = `url('/PNGs/fbf/Comp 1/bounce_word_framebyframe_${paddedIndex}.jpg')`;
+  // Format the index with leading zeros
+  const paddedIndex = String(imageIndex).padStart(5, '0');
+
+  // Set the background image
+  document.body.style.backgroundImage = `url('/PNGs/fbf/Comp 1/bounce_word_framebyframe_${paddedIndex}.jpg')`;
 }
 
 // Initialize event listeners based on device type
@@ -124,7 +133,15 @@ document.querySelector('#ContactTitle').addEventListener('click', () => {
     document.getElementById('GlbWrapper').style.display = "none";
 });
 
-
+//storlek på bilder
+[Bild1, Bild2, Bild3].forEach(bild => {
+  bild.addEventListener('mouseover', () => {
+    gsap.to(bild, { scale: 1.05, duration: 0.5, ease: 'power3.out' });
+  });
+  bild.addEventListener('mouseout', () => {
+    gsap.to(bild, { scale: 1, duration: 0.5, ease: 'power3.out' });
+  });
+});
 
 
 
