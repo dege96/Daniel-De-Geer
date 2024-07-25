@@ -4,11 +4,11 @@ const ContactTitle = document.querySelector('#ContactTitle');
 const AboutPage = document.getElementById('AboutPage');
 const CollectionPage = document.getElementById('CollectionPage');
 const ContactPage = document.getElementById('ContactPage');
-const GlbWrapper =  document.getElementById('GlbWrapper');
+const GlbWrapper = document.getElementById('GlbWrapper');
 
-const Bild1 =  document.getElementById('bild1');
-const Bild2 =  document.getElementById('bild2');
-const Bild3 =  document.getElementById('bild3');
+const Bild1 = document.getElementById('bild1');
+const Bild2 = document.getElementById('bild2');
+const Bild3 = document.getElementById('bild3');
 const title = document.querySelector('#title');
 
 document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_00051.jpg')`;
@@ -29,20 +29,20 @@ let isPreloaded = false;
 
 // Preload images
 function preloadImages() {
-    let loadedImages = 0;
-    for (let i = 32; i <= 69; i++) {
-        const paddedIndex = String(i).padStart(5, '0');
-        const img = new Image();
-        img.src = `/PNGs/fbf/Comp_1/bounce_word_framebyframe_${paddedIndex}.jpg`;
-        img.onload = () => {
-            loadedImages++;
-            if (loadedImages === totalImages) {
-                isPreloaded = true;
-                console.log("All images preloaded.");
-            }
-        };
-        images.push(img);
-    }
+  let loadedImages = 0;
+  for (let i = 32; i <= 69; i++) {
+    const paddedIndex = String(i).padStart(5, '0');
+    const img = new Image();
+    img.src = `/PNGs/fbf/Comp_1/bounce_word_framebyframe_${paddedIndex}.jpg`;
+    img.onload = () => {
+      loadedImages++;
+      if (loadedImages === totalImages) {
+        isPreloaded = true;
+        console.log("All images preloaded.");
+      }
+    };
+    images.push(img);
+  }
 }
 
 // Call preloadImages when the page loads
@@ -50,104 +50,102 @@ window.onload = preloadImages;
 
 // Throttle function to limit how often a function can be executed
 function throttle(func, limit) {
-    let lastFunc;
-    let lastRan;
-    return function(...args) {
-        if (!lastRan) {
-            func.apply(this, args);
-            lastRan = Date.now();
-        } else {
-            clearTimeout(lastFunc);
-            lastFunc = setTimeout(() => {
-                if (Date.now() - lastRan >= limit) {
-                    func.apply(this, args);
-                    lastRan = Date.now();
-                }
-            }, limit - (Date.now() - lastRan));
+  let lastFunc;
+  let lastRan;
+  return function(...args) {
+    if (!lastRan) {
+      func.apply(this, args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(() => {
+        if (Date.now() - lastRan >= limit) {
+          func.apply(this, args);
+          lastRan = Date.now();
         }
-    };
+      }, limit - (Date.now() - lastRan));
+    }
+  };
 }
 
 // Update background image based on mouse movement (desktop)
 function updateBackgroundDesktop(event) {
-    if (!isPreloaded) return;
+  if (!isPreloaded) return;
 
-    const screenWidth = window.innerWidth;
-    const mouseX = event.clientX;
-    let imageIndex = Math.floor((mouseX / screenWidth) * totalImages) + 32;
+  const screenWidth = window.innerWidth;
+  const mouseX = event.clientX;
+  let imageIndex = Math.floor((mouseX / screenWidth) * totalImages) + 32;
 
-    // Ensure imageIndex is within bounds
-    imageIndex = Math.max(32, Math.min(imageIndex, 69));
+  // Ensure imageIndex is within bounds
+  imageIndex = Math.max(32, Math.min(imageIndex, 69));
 
-    const paddedIndex = String(imageIndex).padStart(5, '0');
-    document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_${paddedIndex}.jpg')`;
+  const paddedIndex = String(imageIndex).padStart(5, '0');
+  document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_${paddedIndex}.jpg')`;
 }
 
 // Update background image based on device tilt (mobile)
 function updateBackgroundMobile(event) {
-    if (!isPreloaded) return; // Exit if images are not yet preloaded
+  if (!isPreloaded) return; // Exit if images are not yet preloaded
 
-    const rotation = event.gamma; // gamma represents the left-to-right tilt in degrees
-    let imageIndex = Math.floor(((rotation + 90) / 180) * totalImages) + 32;
+  const rotation = event.gamma; // gamma represents the left-to-right tilt in degrees
+  let imageIndex = Math.floor(((rotation + 90) / 180) * totalImages) + 32;
 
-    // Ensure imageIndex is within bounds
-    if (imageIndex < 32) {
-        imageIndex = 32;
-    } else if (imageIndex > 69) {
-        imageIndex = 69;
-    }
+  // Ensure imageIndex is within bounds
+  if (imageIndex < 32) {
+    imageIndex = 32;
+  } else if (imageIndex > 69) {
+    imageIndex = 69;
+  }
 
-    // Format the index with leading zeros
-    const paddedIndex = String(imageIndex).padStart(5, '0');
+  // Format the index with leading zeros
+  const paddedIndex = String(imageIndex).padStart(5, '0');
 
-    // Set the background image
-    document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_${paddedIndex}.jpg')`;
+  // Set the background image
+  document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_${paddedIndex}.jpg')`;
 }
 
 // Initialize event listeners based on device type
 function init() {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile = isMobileDevice();
 
-    if (isMobile) {
-        // Use deviceorientation for mobile devices to handle tilting
-        window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
-    } else {
-        // For desktop, use mouse movement
-        document.addEventListener('mousemove', throttle(updateBackgroundDesktop, 30));
-    }
+  if (isMobile) {
+    requestDeviceOrientationPermission();
+  } else {
+    document.addEventListener('mousemove', throttle(updateBackgroundDesktop, 30));
+  }
 }
 
 // Request permission for device orientation (iOS specific)
 function requestDeviceOrientationPermission() {
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission()
-            .then(permissionState => {
-                if (permissionState === 'granted') {
-                    window.addEventListener('deviceorientation', updateBackgroundMobile);
-                    console.log('Device orientation permission granted. Event listener added.');
-                } else {
-                    console.log('Device orientation permission denied.');
-                }
-            })
-            .catch(console.error);
-    } else {
-        // Non-iOS devices
-        window.addEventListener('deviceorientation', updateBackgroundMobile);
-        console.log('Non-iOS device detected. Device orientation event listener added.');
-    }
+  if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+    DeviceOrientationEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === 'granted') {
+          window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
+          console.log('Device orientation permission granted. Event listener added.');
+        } else {
+          console.log('Device orientation permission denied.');
+        }
+      })
+      .catch(console.error);
+  } else {
+    // Non-iOS devices
+    window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
+    console.log('Non-iOS device detected. Device orientation event listener added.');
+  }
 }
 
 // Check if the device is mobile
 function isMobileDevice() {
-    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
 
 // Register event listeners based on the device type
 if (isMobileDevice()) {
-    requestDeviceOrientationPermission();
+  requestDeviceOrientationPermission();
 } else {
-    window.addEventListener('mousemove', updateBackgroundDesktop);
-    console.log('Desktop device detected. Mouse move event listener added.');
+  window.addEventListener('mousemove', updateBackgroundDesktop);
+  console.log('Desktop device detected. Mouse move event listener added.');
 }
 
 // Initialize the script
@@ -156,25 +154,25 @@ document.addEventListener('DOMContentLoaded', init);
 
 // Navigation event handlers
 document.querySelector('#CollectionTitle').addEventListener('click', () => {
-    console.log('You clicked the Collection Title!');
-    document.getElementById('AboutPage').style.display = 'none';
-    document.getElementById('ContactPage').style.display = 'none';
-    document.getElementById('CollectionPage').style.display = 'flex';
-    document.getElementById('GlbWrapper').style.display = "none";
+  console.log('You clicked the Collection Title!');
+  document.getElementById('AboutPage').style.display = 'none';
+  document.getElementById('ContactPage').style.display = 'none';
+  document.getElementById('CollectionPage').style.display = 'flex';
+  document.getElementById('GlbWrapper').style.display = "none";
 });
 
 document.querySelector('#AboutTitle').addEventListener('click', () => {
-    console.log('You clicked the About Title!');
-    document.getElementById('ContactPage').style.display = 'none';
-    document.getElementById('CollectionPage').style.display = 'none';
-    document.getElementById('AboutPage').style.display = 'flex';
-    document.getElementById('GlbWrapper').style.display = "none";
+  console.log('You clicked the About Title!');
+  document.getElementById('ContactPage').style.display = 'none';
+  document.getElementById('CollectionPage').style.display = 'none';
+  document.getElementById('AboutPage').style.display = 'flex';
+  document.getElementById('GlbWrapper').style.display = "none";
 });
 
 document.querySelector('#ContactTitle').addEventListener('click', () => {
-    console.log('You clicked the Contact Title!');
-    document.getElementById('AboutPage').style.display = 'none';
-    document.getElementById('CollectionPage').style.display = 'none';
-    document.getElementById('ContactPage').style.display = 'flex';
-    document.getElementById('GlbWrapper').style.display = "none";
+  console.log('You clicked the Contact Title!');
+  document.getElementById('AboutPage').style.display = 'none';
+  document.getElementById('CollectionPage').style.display = 'none';
+  document.getElementById('ContactPage').style.display = 'flex';
+  document.getElementById('GlbWrapper').style.display = "none";
 });
