@@ -4,14 +4,6 @@ const ContactTitle = document.querySelector('#ContactTitle');
 const AboutPage = document.getElementById('AboutPage');
 const CollectionPage = document.getElementById('CollectionPage');
 const ContactPage = document.getElementById('ContactPage');
-const GlbWrapper = document.getElementById('GlbWrapper');
-
-const Bild1 = document.getElementById('bild1');
-const Bild2 = document.getElementById('bild2');
-const Bild3 = document.getElementById('bild3');
-const title = document.querySelector('#title');
-
-//document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_00051.jpg')`;
 
 const images = [];
 const totalImages = 38;
@@ -49,15 +41,12 @@ function removeImages() {
   console.log("Images removed from array.");
 }
 
-
 // Navigation event handlers
 CollectionTitle.addEventListener('click', () => {
   console.log('You clicked the Collection Title!');
   AboutPage.style.display = 'none';
   ContactPage.style.display = 'none';
   CollectionPage.style.display = 'flex';
-
-  
   removeImages(); // Remove images when switching to Collection Page
 });
 
@@ -66,7 +55,6 @@ AboutTitle.addEventListener('click', () => {
   ContactPage.style.display = 'none';
   CollectionPage.style.display = 'none';
   AboutPage.style.display = 'flex';
-
   removeImages(); // Remove images when switching to About Page
 });
 
@@ -75,11 +63,8 @@ ContactTitle.addEventListener('click', () => {
   AboutPage.style.display = 'none';
   CollectionPage.style.display = 'none';
   ContactPage.style.display = 'flex';
-
-  
   removeImages(); // Remove images when switching to Contact Page
 });
-
 
 // Throttle function to limit how often a function can be executed
 function throttle(func, limit) {
@@ -124,11 +109,7 @@ function updateBackgroundMobile(event) {
   let imageIndex = Math.floor(((rotation + 90) / 180) * totalImages) + 32;
 
   // Ensure imageIndex is within bounds
-  if (imageIndex < 32) {
-    imageIndex = 32;
-  } else if (imageIndex > 69) {
-    imageIndex = 69;
-  }
+  imageIndex = Math.max(32, Math.min(imageIndex, 69));
 
   // Format the index with leading zeros
   const paddedIndex = String(imageIndex).padStart(5, '0');
@@ -139,9 +120,7 @@ function updateBackgroundMobile(event) {
 
 // Initialize event listeners based on device type
 function init() {
-  const isMobile = isMobileDevice();
-
-  if (isMobile) {
+  if (isMobileDevice()) {
     requestDeviceOrientationPermission();
   } else {
     document.addEventListener('mousemove', throttle(updateBackgroundDesktop, 30));
@@ -174,38 +153,7 @@ function isMobileDevice() {
 }
 
 // Register event listeners based on the device type
-if (isMobileDevice()) {
-  requestDeviceOrientationPermission();
-} else {
-  window.addEventListener('mousemove', updateBackgroundDesktop);
-  console.log('Desktop device detected. Mouse move event listener added.');
-}
-
-// Initialize the script
-preloadImages();
-document.addEventListener('DOMContentLoaded', init);
-
-// Navigation event handlers
-document.querySelector('#CollectionTitle').addEventListener('click', () => {
-  console.log('You clicked the Collection Title!');
-  document.getElementById('AboutPage').style.display = 'none';
-  document.getElementById('ContactPage').style.display = 'none';
-  document.getElementById('CollectionPage').style.display = 'flex';
-
-});
-
-document.querySelector('#AboutTitle').addEventListener('click', () => {
-  console.log('You clicked the About Title!');
-  document.getElementById('ContactPage').style.display = 'none';
-  document.getElementById('CollectionPage').style.display = 'none';
-  document.getElementById('AboutPage').style.display = 'flex';
-
-});
-
-document.querySelector('#ContactTitle').addEventListener('click', () => {
-  console.log('You clicked the Contact Title!');
-  document.getElementById('AboutPage').style.display = 'none';
-  document.getElementById('CollectionPage').style.display = 'none';
-  document.getElementById('ContactPage').style.display = 'flex';
-
+document.addEventListener('DOMContentLoaded', () => {
+  preloadImages();
+  init();
 });

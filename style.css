@@ -1,37 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 @keyframes slide-in {
-  0% {
-    top: -80px;
-  }
-  40% {
-    top: 20px;
-  }
-  70% {
-    top: 10px;
-  }
-  100% {
-    top: 15px;
-  }
+  0% { top: -80px; }
+  40% { top: 20px; }
+  70% { top: 10px; }
+  100% { top: 15px; }
 }
 
 @keyframes fadeInColour {
-  from {
-    color: rgb(222, 222, 222);
-  }
-  to {
-    color: #FFC876;
-  }
+  from { color: rgb(222, 222, 222); }
+  to { color: #FFC876; }
 }
 
 @keyframes fadeOutColour {
-  from {
-    color: #FFC876;
-  }
-  to {
-
-    color: whitesmoke;
-  }
+  from { color: #FFC876; }
+  to { color: whitesmoke; }
 }
 
 html, body {
@@ -50,7 +33,7 @@ html {
 
 body {
   background-position: center;
-  background-size: 150% auto; /* Scale the background image to 2 times its original size */
+  background-size: 150% auto;
 }
 
 .background {
@@ -76,7 +59,7 @@ h1 {
   margin-top: 5rem;
   font-size: 3rem;
   color: rgb(222, 222, 222);
-	font-family: 'Montserrat';
+  font-family: 'Montserrat';
 }
 
 h2 {
@@ -94,7 +77,7 @@ h3 {
 }
 
 .textbox1 {
-  width: 500px;
+  width: 80%; /* Adjusted width for responsiveness */
   height: 300px;
   margin: auto;
   overflow: auto;
@@ -106,15 +89,12 @@ h3 {
   display: flex;
   gap: 10px;
   z-index: 6;
-  display: flex;
   flex-wrap: nowrap;
   margin-top: 30vh;
   justify-content: center;
   align-items: center;
   padding: 1rem;
   overflow: hidden;
-
-
 }
 
 .scrollable-item {
@@ -127,7 +107,7 @@ h3 {
   border-radius: 10px;
   box-shadow: 0px 3px 3px rgba(255, 255, 255, 0.048);
   object-fit: cover;
-  transition: transform 0.2s ease, opacity 0.3s; /* Combined transition properties */
+  transition: transform 0.2s ease, opacity 0.3s;
   overflow: hidden;
 }
 
@@ -142,7 +122,7 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.25); /* White overlay with 25% opacity */
+  background: rgba(255, 255, 255, 0.25);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -195,21 +175,21 @@ h3 {
   align-items: center;
   position: relative;
   padding: 20px;
-  width: 300px;
+  width: 80%; /* Adjusted width for responsiveness */
+  max-width: 300px; /* Maximum width */
   margin: 25vh auto;
   font-family: "Montserrat";
-  /*background: linear-gradient(#54575a, #1f2225); */
   border-radius: 20px;
   border: 1px solid #ffffff;
   animation: fadeIn 1s;
 }
 
-  #ContactPage p,
-  #ContactPage a {
-      color: rgb(231, 228, 233);
-      text-decoration: none;
-      margin: 10px 0; /* add some margin to the text */
-  }
+#ContactPage p,
+#ContactPage a {
+  color: rgb(231, 228, 233);
+  text-decoration: none;
+  margin: 10px 0;
+}
 
 #GlbWrapper {
   height: 100vh;
@@ -222,16 +202,15 @@ h3 {
 }
 
 * {
-  margin: 10;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
 .header-container {
   animation: slide-in 1s ease-out;
   z-index: 10;
-  position: relative; /* Add a position property */
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -239,7 +218,7 @@ h3 {
   top: 2.2vh;
 }
 
-#contact_text{
+#contact_text {
   margin: 2vh;
 }
 
@@ -264,13 +243,8 @@ h3 {
   font-family: "Lato", sans-serif;
   justify-content: center;
   align-items: center;
-
   margin: auto;
   margin-top: 10rem;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
   text-align: center;
   font-size: 3.5rem;
 }
@@ -283,7 +257,7 @@ h3 {
   cursor: pointer;
 }
 
-accordion-menu{
+accordion-menu {
   position: absolute;
   width: 300px;
   z-index: 4;
@@ -291,12 +265,12 @@ accordion-menu{
   left: 70%;
 }
 
-#Bild1Accordion{
+#Bild1Accordion {
   opacity: 0;
   transition: opacity 1s, transform 1s;
 }
 
-#Bild2Accordion{
+#Bild2Accordion {
   opacity: 0;
   transition: opacity 1s, transform 1s;
 }
@@ -346,7 +320,6 @@ img {
   cursor: pointer;
 }
 
-
 .testCanvas {
   margin-top: 3vh;
   top: 0;
@@ -377,6 +350,106 @@ li {
   text-align: center;
 }
 
-#orangetext{
-  color: #FFC876;
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  /* Adjustments for tablets and small screens */
+  h1 {
+    font-size: 2rem;
+    margin-top: 3rem;
+  }
+
+  h2, h3 {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .textbox1 {
+    width: 90%;
+    height: auto;
+  }
+
+  .scrollable-container {
+    margin-top: 20vh;
+    padding: 0.5rem;
+  }
+
+  .scrollable-item {
+    height: 20vh;
+    width: 20vh;
+    margin-right: 0.5rem;
+  }
+
+  #ContactPage {
+    width: 90%;
+    margin: 20vh auto;
+  }
+
+  .Title {
+    margin-left: 10vw;
+    margin-right: 10vw;
+  }
+
+  .top {
+    font-size: 2.5rem;
+    margin-top: 5rem;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Adjustments for mobile phones */
+  h1 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  h2, h3 {
+    font-size: 0.8rem;
+  }
+
+  .textbox1 {
+    width: 100%;
+    height: auto;
+  }
+
+  .scrollable-container {
+    margin-top: 10vh;
+    flex-direction: column;
+  }
+
+  .scrollable-item {
+    height: 25vh;
+    width: 25vh;
+    margin-bottom: 1rem;
+    margin-right: 0;
+  }
+
+  #ContactPage {
+    width: 100%;
+    margin: 15vh auto;
+  }
+
+  .Title {
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+
+  .top {
+    font-size: 2rem;
+    margin-top: 3rem;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
