@@ -39,11 +39,13 @@ html {
   overflow: hidden;
   background: linear-gradient(#404141, #518dd6);
   background-size: cover;
+
 }
 
 body {
   background-position: center;
   background-size: 150% auto;
+  background-blend-mode: color-burn;
 }
 
 .background {
@@ -56,6 +58,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  mix-blend-mode: color-burn;
   /* mix-blend-mode: multiply; */
   z-index: -1;
 }
@@ -65,16 +68,6 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-}
-
-.victor-container {
-  position: relative;
-  gap: 10px;
-}
-
-.victor-images {
-  mix-blend-mode: color-burn;
-  animation-iteration-count: infinite;
 }
 
 #requestPermissionButton {
@@ -184,6 +177,15 @@ h3 {
   100% { opacity: 1; }
 }
 
+.accordions{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 9vh;
+  animation: fadeIn 2s;
+}
+
 #AboutPage {
   display: none;
   flex-direction: column;
@@ -273,6 +275,23 @@ h3 {
   color:#ffc87682;
 }
 
+.standardText {
+  color: white;
+  font-family: "Lato", sans-serif;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+#aboutText{
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vh;
+}
+
 .top {
   color: white;
   font-family: "Lato", sans-serif;
@@ -283,6 +302,14 @@ h3 {
   text-align: center;
   font-size: 3.5rem;
 }
+
+#vdgwhiteorange {
+  justify-content: center;
+  align-items: center;
+  margin-top: 12vh;
+}
+
+
 
 .Title {
   margin-bottom: 10px;

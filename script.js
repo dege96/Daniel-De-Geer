@@ -7,11 +7,12 @@ const ContactPage = document.getElementById('ContactPage');
 
 const screenWidth = window.innerWidth;
 const images = [];
+const imageChoice = "Flashy2_NB"
 const firstPic = 32;
-const lastPic = 69;
+const lastPic = 90;
 const totalImages = lastPic - firstPic;
-
 let isPreloaded = false;
+
 
 // ------------------------------------------ IMAGE LOADER/APPENDER ----------------------------------------------------
 
@@ -21,12 +22,7 @@ function preloadImages() {
   for (let i = firstPic; i <= lastPic; i++) {
       const paddedIndex = String(i).padStart(5, '0');
       const img = new Image();
-      img.src = `/PNGs/fbf/Comp_1/Comp 1_${paddedIndex}.png`;
-
-      const victorcontainer = document.getElementById('victor-container');
-      img.classList.add('victor-images');
-      img.id = `image${paddedIndex}`;
-      victorcontainer.appendChild(img);
+      img.src = `/PNGs/fbf/${imageChoice}/Comp 1_${paddedIndex}.png`;
 
       img.onload = () => {
           loadedImages++;
@@ -73,6 +69,7 @@ function updateBackgroundDesktop(event) {
     console.error(`Image with index ${indexInArray} not found in the images array.`);
   }
 }
+
 // Update background image based on device tilt (mobile)
 function updateBackgroundMobile(event) {
   if (!isPreloaded) return;
