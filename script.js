@@ -5,17 +5,23 @@ const AboutPage = document.getElementById('AboutPage');
 const CollectionPage = document.getElementById('CollectionPage');
 const ContactPage = document.getElementById('ContactPage');
 
+const screenWidth = window.innerWidth;
 const images = [];
-const totalImages = 38;
+const firstPic = 32;
+const lastPic = 69;
+const totalImages = lastPic - firstPic;
+
 let isPreloaded = false;
+
+// ------------------------------------------ image handling ----------------------------------------------------
 
 // Preload images
 function preloadImages() {
   let loadedImages = 0;
-  for (let i = 32; i <= 69; i++) {
+  for (let i = firstPic; i <= lastPic; i++) {
     const paddedIndex = String(i).padStart(5, '0');
     const img = new Image();
-    img.src = `/PNGs/fbf/Comp_1/bounce_word_framebyframe_${paddedIndex}.jpg`;
+    img.src = `/PNGs/fbf/Comp_1/Comp 1_${paddedIndex}.png`;
     img.onload = () => {
       loadedImages++;
       if (loadedImages === totalImages) {
@@ -27,8 +33,56 @@ function preloadImages() {
   }
 }
 
-// Call preloadImages when the page loads
-window.onload = preloadImages;
+// Add class to images
+function displayImages() {
+  const container = document.getElementById('victor-container');
+  images.forEach((img, index) => {
+      img.classList.add('image');
+      img.id = `image${index + 1}`;
+      container.appendChild(img);
+  });
+}
+
+// Update background image based on mouse movement (desktop)
+function updateBackgroundDesktop(event) {
+  if (!isPreloaded) return;
+  
+  const mouseX = event.clientX;
+  let imageIndex = Math.floor((mouseX / screenWidth) * totalImages) + 32;
+
+  // Ensure imageIndex is within bounds
+  imageIndex = Math.max(32, Math.min(imageIndex, 69));
+
+  const paddedIndex = String(imageIndex).padStart(5, '0');
+  document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/Comp 1_${paddedIndex}.png')`;
+}
+
+
+// Update background image based on device tilt (mobile)
+function updateBackgroundMobile(event) {
+  if (!isPreloaded) return; // Exit if images are not yet preloaded
+
+  const rotation = event.alpha; // alpha represents the rotation around the z-axis
+  const tilt = event.gamma; // gamma represents the left-to-right tilt in degrees
+
+  // Calculate image index based on both rotation and tilt
+  let imageIndex = Math.floor(((rotation + tilt + 180) / 360) * totalImages) + 32;
+
+  // Ensure imageIndex is within bounds
+  imageIndex = Math.max(32, Math.min(imageIndex, 69));
+
+  // Format the index with leading zeros
+  const paddedIndex = String(imageIndex).padStart(5, '0');
+
+  // Set the background image
+  document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/Comp 1_${paddedIndex}.png')`;
+}
+
+// Preload images when the page loads
+window.onload = () => {
+  preloadImages();
+  requestDeviceOrientationPermission();
+};
 
 // Function to remove images from the array
 function removeImages() {
@@ -41,7 +95,8 @@ function removeImages() {
   console.log("Images removed from array.");
 }
 
-// Navigation event handlers
+//------------------------------------------  Navigation event handlers ----------------------------------------------------
+
 CollectionTitle.addEventListener('click', () => {
   console.log('You clicked the Collection Title!');
   AboutPage.style.display = 'none';
@@ -66,6 +121,8 @@ ContactTitle.addEventListener('click', () => {
   removeImages(); // Remove images when switching to Contact Page
 });
 
+// --------------------------------------- Throttle Function ------------------------------------------------ 
+
 // Throttle function to limit how often a function can be executed
 function throttle(func, limit) {
   let lastFunc;
@@ -86,38 +143,6 @@ function throttle(func, limit) {
   };
 }
 
-// Update background image based on mouse movement (desktop)
-function updateBackgroundDesktop(event) {
-  if (!isPreloaded) return;
-
-  const screenWidth = window.innerWidth;
-  const mouseX = event.clientX;
-  let imageIndex = Math.floor((mouseX / screenWidth) * totalImages) + 32;
-
-  // Ensure imageIndex is within bounds
-  imageIndex = Math.max(32, Math.min(imageIndex, 69));
-
-  const paddedIndex = String(imageIndex).padStart(5, '0');
-  document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_${paddedIndex}.jpg')`;
-}
-
-// Update background image based on device tilt (mobile)
-function updateBackgroundMobile(event) {
-  if (!isPreloaded) return; // Exit if images are not yet preloaded
-
-  const rotation = event.gamma; // gamma represents the left-to-right tilt in degrees
-  let imageIndex = Math.floor(((rotation + 90) / 180) * totalImages) + 32;
-
-  // Ensure imageIndex is within bounds
-  imageIndex = Math.max(32, Math.min(imageIndex, 69));
-
-  // Format the index with leading zeros
-  const paddedIndex = String(imageIndex).padStart(5, '0');
-
-  // Set the background image
-  document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/bounce_word_framebyframe_${paddedIndex}.jpg')`;
-}
-
 // Initialize event listeners based on device type
 function init() {
   if (isMobileDevice()) {
@@ -126,6 +151,8 @@ function init() {
     document.addEventListener('mousemove', throttle(updateBackgroundDesktop, 30));
   }
 }
+
+//------------------------------------------ IPHONE ------------------------------------------ 
 
 // Request permission for device orientation (iOS specific)
 function requestDeviceOrientationPermission() {

@@ -45,7 +45,9 @@ body {
   background-image: url('/PNGs/1.jpg');
   background-size: cover;
   background-position: center;
-  mix-blend-mode: multiply;
+  background-repeat: no-repeat;
+  /* mix-blend-mode: multiply; */
+  z-index: -1;
 }
 
 #image-container {
@@ -53,6 +55,29 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+}
+
+.victor-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.victor-images {
+  width: 100px;
+  height: 100px;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes scale {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.5); }
 }
 
 h1 {
