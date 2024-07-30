@@ -69,14 +69,11 @@ body {
 
 .victor-container {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
 }
 
 .victor-images {
-  width: 100px;
-  height: 100px;
+  mix-blend-mode: color-burn;
   animation-iteration-count: infinite;
 }
 

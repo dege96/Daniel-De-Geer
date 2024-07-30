@@ -13,67 +13,80 @@ const totalImages = lastPic - firstPic;
 
 let isPreloaded = false;
 
-// ------------------------------------------ image handling ----------------------------------------------------
+// ------------------------------------------ IMAGE LOADER/APPENDER ----------------------------------------------------
 
 // Preload images
 function preloadImages() {
   let loadedImages = 0;
   for (let i = firstPic; i <= lastPic; i++) {
-    const paddedIndex = String(i).padStart(5, '0');
-    const img = new Image();
-    img.src = `/PNGs/fbf/Comp_1/Comp 1_${paddedIndex}.png`;
-    img.onload = () => {
-      loadedImages++;
-      if (loadedImages === totalImages) {
-        isPreloaded = true;
-        console.log("All images preloaded.");
-      }
-    };
-    images.push(img);
+      const paddedIndex = String(i).padStart(5, '0');
+      const img = new Image();
+      img.src = `/PNGs/fbf/Comp_1/Comp 1_${paddedIndex}.png`;
+
+      const victorcontainer = document.getElementById('victor-container');
+      img.classList.add('victor-images');
+      img.id = `image${paddedIndex}`;
+      victorcontainer.appendChild(img);
+
+      img.onload = () => {
+          loadedImages++;
+          if (loadedImages === totalImages) {
+              isPreloaded = true;
+              console.log("All images preloaded.");
+          }
+      };
+      images.push(img);
   }
 }
 
-// Add class to images
-function displayImages() {
-  const container = document.getElementById('victor-container');
-  images.forEach((img, index) => {
-      img.classList.add('image');
-      img.id = `image${index + 1}`;
-      container.appendChild(img);
+// Remove images from the array and clear memory
+function removeImages() {
+  images.forEach(img => {
+      img.src = ''; // Clear image source to free up memory
   });
+  images.length = 0; // Clear the array
+  isPreloaded = false; // Optionally reset preload status
+  document.body.style.backgroundImage = ''; // Clear background image
+  console.log("Images removed from array.");
 }
 
-// Update background image based on mouse movement (desktop)
+// -------------------------------------- Background Update Functions ---------------------------------------
+
 function updateBackgroundDesktop(event) {
   if (!isPreloaded) return;
-  
+
   const mouseX = event.clientX;
-  let imageIndex = Math.floor((mouseX / screenWidth) * totalImages) + 32;
+  const screenWidth = window.innerWidth; // Get screen width dynamically
+  let imageIndex = Math.floor((mouseX / screenWidth) * totalImages) + firstPic;
 
   // Ensure imageIndex is within bounds
-  imageIndex = Math.max(32, Math.min(imageIndex, 69));
+  imageIndex = Math.max(firstPic, Math.min(imageIndex, lastPic));
 
-  const paddedIndex = String(imageIndex).padStart(5, '0');
-  document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/Comp 1_${paddedIndex}.png')`;
+  const indexInArray = imageIndex - firstPic; // Calculate the index in the `images` array
+  const imageElement = images[indexInArray]; // Access the image element directly
+
+  if (imageElement) {
+    const imageUrl = imageElement.src; // Get the URL of the image
+    // Update the background image
+    document.body.style.backgroundImage = `url(${imageUrl})`;
+  } else {
+    console.error(`Image with index ${indexInArray} not found in the images array.`);
+  }
 }
-
-
 // Update background image based on device tilt (mobile)
 function updateBackgroundMobile(event) {
-  if (!isPreloaded) return; // Exit if images are not yet preloaded
+  if (!isPreloaded) return;
 
-  const rotation = event.alpha; // alpha represents the rotation around the z-axis
+  const rotation = event.alpha; // rotation around the z-axis
+  const tilt = event.gamma; // left-to-right tilt in degrees
 
   // Calculate image index based on both rotation and tilt
-  let imageIndex = Math.floor(((rotation + 180) / 360) * totalImages) + 32;
+  let imageIndex = Math.floor(((rotation + tilt + 180) / 360) * totalImages) + firstPic;
 
   // Ensure imageIndex is within bounds
-  imageIndex = Math.max(32, Math.min(imageIndex, 69));
+  imageIndex = Math.max(firstPic, Math.min(imageIndex, lastPic));
 
-  // Format the index with leading zeros
   const paddedIndex = String(imageIndex).padStart(5, '0');
-
-  // Set the background image
   document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/Comp 1_${paddedIndex}.png')`;
 }
 
@@ -88,10 +101,11 @@ function removeImages() {
   console.log("Images removed from array.");
 }
 
+
 //------------------------------------------  Navigation event handlers ----------------------------------------------------
 
 CollectionTitle.addEventListener('click', () => {
-  console.log('You clicked the Collection Title!');
+  console.log('You clicked the Collection Title');
   AboutPage.style.display = 'none';
   ContactPage.style.display = 'none';
   CollectionPage.style.display = 'flex';
@@ -99,7 +113,7 @@ CollectionTitle.addEventListener('click', () => {
 });
 
 AboutTitle.addEventListener('click', () => {
-  console.log('You clicked the About Title!');
+  console.log('You clicked the About Title');
   ContactPage.style.display = 'none';
   CollectionPage.style.display = 'none';
   AboutPage.style.display = 'flex';
@@ -107,12 +121,13 @@ AboutTitle.addEventListener('click', () => {
 });
 
 ContactTitle.addEventListener('click', () => {
-  console.log('You clicked the Contact Title!');
+  console.log('You clicked the Contact Title');
   AboutPage.style.display = 'none';
   CollectionPage.style.display = 'none';
   ContactPage.style.display = 'flex';
   removeImages(); // Remove images when switching to Contact Page
 });
+
 
 // --------------------------------------- Throttle Function ------------------------------------------------ 
 
@@ -150,6 +165,7 @@ function requestDeviceOrientationPermission() {
 
   // Check if iOS 13+ permission request is needed
   if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      console.log('iOS 13+ device detected, permission for DeviceOrientationEvent needed')
       requestPermissionButton.style.display = 'block'; // Show button for iOS 13+
       requestPermissionButton.addEventListener('click', () => {
           DeviceOrientationEvent.requestPermission()
@@ -165,6 +181,7 @@ function requestDeviceOrientationPermission() {
       });
   } else {
       // Handle regular non-iOS 13+ devices
+      console.log('non iOS 13+ device detected, permission not needed');
       window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
   }
 }
@@ -180,8 +197,10 @@ function isMobileDevice() {
 function init() {
   if (isMobileDevice()) {
       requestDeviceOrientationPermission();
+      console.log("Device detected: mobile");
   } else {
       document.addEventListener('mousemove', throttle(updateBackgroundDesktop, 30));
+      console.log("Device detected: computer");
   }
 }
 
@@ -190,8 +209,3 @@ window.onload = () => {
   preloadImages();
   init();
 };
-
-// Register event listeners based on the device type
-document.addEventListener('DOMContentLoaded', () => {
-  preloadImages();
-});
