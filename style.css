@@ -17,6 +17,16 @@
   to { color: whitesmoke; }
 }
 
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes scale {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.5); }
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -70,14 +80,17 @@ body {
   animation-iteration-count: infinite;
 }
 
-@keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes scale {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.5); }
+#requestPermissionButton {
+  display: none; /* Hide by default and show only for iOS 13+ devices */
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 h1 {

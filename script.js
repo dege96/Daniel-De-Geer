@@ -63,10 +63,9 @@ function updateBackgroundMobile(event) {
   if (!isPreloaded) return; // Exit if images are not yet preloaded
 
   const rotation = event.alpha; // alpha represents the rotation around the z-axis
-  const tilt = event.gamma; // gamma represents the left-to-right tilt in degrees
 
   // Calculate image index based on both rotation and tilt
-  let imageIndex = Math.floor(((rotation + tilt + 180) / 360) * totalImages) + 32;
+  let imageIndex = Math.floor(((rotation + 180) / 360) * totalImages) + 32;
 
   // Ensure imageIndex is within bounds
   imageIndex = Math.max(32, Math.min(imageIndex, 69));
@@ -77,12 +76,6 @@ function updateBackgroundMobile(event) {
   // Set the background image
   document.body.style.backgroundImage = `url('/PNGs/fbf/Comp_1/Comp 1_${paddedIndex}.png')`;
 }
-
-// Preload images when the page loads
-window.onload = () => {
-  preloadImages();
-  requestDeviceOrientationPermission();
-};
 
 // Function to remove images from the array
 function removeImages() {
@@ -143,44 +136,62 @@ function throttle(func, limit) {
   };
 }
 
-// Initialize event listeners based on device type
-function init() {
-  if (isMobileDevice()) {
-    requestDeviceOrientationPermission();
-  } else {
-    document.addEventListener('mousemove', throttle(updateBackgroundDesktop, 30));
-  }
-}
+//-----------------     ------------------------- IPHONE ---------------------      --------------------- 
 
-//------------------------------------------ IPHONE ------------------------------------------ 
 
-// Request permission for device orientation (iOS specific)
+// ------------------------------------ Device Orientation Permission ----------------------------------------
+
+// Request permission for device orientation on iOS 13+
 function requestDeviceOrientationPermission() {
-  if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-    DeviceOrientationEvent.requestPermission()
-      .then(permissionState => {
-        if (permissionState === 'granted') {
-          window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
-          console.log('Device orientation permission granted. Event listener added.');
-        } else {
-          console.log('Device orientation permission denied.');
-        }
-      })
-      .catch(console.error);
+  if (!requestPermissionButton) {
+      console.error('requestPermissionButton not found in the DOM.');
+      return;
+  }
+
+  // Check if iOS 13+ permission request is needed
+  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      requestPermissionButton.style.display = 'block'; // Show button for iOS 13+
+      requestPermissionButton.addEventListener('click', () => {
+          DeviceOrientationEvent.requestPermission()
+              .then(permissionState => {
+                  if (permissionState === 'granted') {
+                      window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
+                      requestPermissionButton.style.display = 'none'; // Hide button after permission granted
+                  } else {
+                      alert('Permission to access device orientation was denied.');
+                  }
+              })
+              .catch(console.error);
+      });
   } else {
-    // Non-iOS devices
-    window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
-    console.log('Non-iOS device detected. Device orientation event listener added.');
+      // Handle regular non-iOS 13+ devices
+      window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
   }
 }
+
+// --------------------------------------- Device Initialization --------------------------------------------
 
 // Check if the device is mobile
 function isMobileDevice() {
   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
 
+// Initialize event listeners based on device type
+function init() {
+  if (isMobileDevice()) {
+      requestDeviceOrientationPermission();
+  } else {
+      document.addEventListener('mousemove', throttle(updateBackgroundDesktop, 30));
+  }
+}
+
+// Preload images and initialize event listeners when the page loads
+window.onload = () => {
+  preloadImages();
+  init();
+};
+
 // Register event listeners based on the device type
 document.addEventListener('DOMContentLoaded', () => {
   preloadImages();
-  init();
 });
