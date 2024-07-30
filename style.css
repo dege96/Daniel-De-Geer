@@ -287,6 +287,8 @@ h3 {
 }
 
 #aboutText{
+  padding: 1vh;
+  font-size: small;
   justify-content: center;
   align-items: center;
   margin-top: 1vh;
@@ -420,6 +422,12 @@ li {
 
 @media (max-width: 768px) {
   /* Adjustments for tablets and small screens */
+
+  #CollectionPage {
+    height: 100vh; /* Ensure the height allows for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+
   h1 {
     font-size: 2rem;
     margin-top: 3rem;
@@ -476,6 +484,8 @@ li {
 
   h2, h3 {
     font-size: 0.8rem;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 
   .textbox1 {
@@ -511,7 +521,12 @@ li {
   }
 
   .header-container {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
   }
+}
+
+#CollectionPage {
+  height: 100vh; /* Ensure the height allows for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
 }

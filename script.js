@@ -151,49 +151,22 @@ function throttle(func, limit) {
 //-----------------     ------------------------- IPHONE ---------------------      --------------------- 
 
 
-// ------------------------------------ Device Orientation Permission ----------------------------------------
-
-// Request permission for device orientation on iOS 13+
-function requestDeviceOrientationPermission() {
-  if (!requestPermissionButton) {
-      console.error('requestPermissionButton not found in the DOM.');
-      return;
-  }
-
-  // Check if iOS 13+ permission request is needed
-  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-      console.log('iOS 13+ device detected, permission for DeviceOrientationEvent needed')
-      requestPermissionButton.style.display = 'block'; // Show button for iOS 13+
-      requestPermissionButton.addEventListener('click', () => {
-          DeviceOrientationEvent.requestPermission()
-              .then(permissionState => {
-                  if (permissionState === 'granted') {
-                      window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
-                      requestPermissionButton.style.display = 'none'; // Hide button after permission granted
-                  } else {
-                      alert('Permission to access device orientation was denied.');
-                  }
-              })
-              .catch(console.error);
-      });
-  } else {
-      // Handle regular non-iOS 13+ devices
-      console.log('non iOS 13+ device detected, permission not needed');
-      window.addEventListener('deviceorientation', throttle(updateBackgroundMobile, 30));
-  }
-}
-
 // --------------------------------------- Device Initialization --------------------------------------------
 
 // Check if the device is mobile
 function isMobileDevice() {
   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 }
 
 // Initialize event listeners based on device type
 function init() {
   if (isMobileDevice()) {
-      requestDeviceOrientationPermission();
+      ContactPage.style.display = 'none';
+      CollectionPage.style.display = 'none';
+      AboutPage.style.display = 'flex';
+      AboutPage.style.color = 'rgba(255, 200, 118, 0.5)';
+      removeImages(); // Remove images when switching to About Page
       console.log("Device detected: mobile");
   } else {
       document.addEventListener('mousemove', throttle(updateBackgroundDesktop, 30));
