@@ -36,7 +36,6 @@ html, body {
 }
 
 html {
-  overflow: hidden;
   background: linear-gradient(#404141, #518dd6);
   background-size: cover;
 
@@ -65,9 +64,6 @@ body {
 
 #image-container {
   position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
 }
 
 #requestPermissionButton {
@@ -122,7 +118,6 @@ h3 {
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  overflow: hidden;
 }
 
 .scrollable-item {
@@ -136,7 +131,6 @@ h3 {
   box-shadow: 0px 3px 3px rgba(255, 255, 255, 0.048);
   object-fit: cover;
   transition: transform 0.2s ease, opacity 0.3s;
-  overflow: hidden;
 }
 
 .scrollable-item:hover {
@@ -226,16 +220,6 @@ h3 {
   color: rgb(231, 228, 233);
   text-decoration: none;
   margin: 10px 0;
-}
-
-#GlbWrapper {
-  height: 100vh;
-  width: 100vw;
-  display: none;
-  transition: opacity 1s;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
 }
 
 * {
@@ -361,7 +345,6 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
 }
 
 img {
@@ -420,63 +403,10 @@ li {
   align-items: center;
 }
 
-@media (max-width: 768px) {
-  /* Adjustments for tablets and small screens */
-
-  #CollectionPage {
-    height: 100vh; /* Ensure the height allows for scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-top: 3rem;
-  }
-
-  h2, h3 {
-    font-size: 0.9rem;
-    margin-top: 1rem;
-  }
-
-  .textbox1 {
-    width: 90%;
-    height: auto;
-  }
-
-  .scrollable-container {
-    margin-top: 20vh;
-    padding: 0.5rem;
-  }
-
-  .scrollable-item {
-    height: 20vh;
-    width: 20vh;
-    margin-right: 0.5rem;
-  }
-
-  #ContactPage {
-    width: 90%;
-    margin: 20vh auto;
-  }
-
-  .Title {
-    margin-left: 10vw;
-    margin-right: 10vw;
-  }
-
-  .top {
-    font-size: 2.5rem;
-    margin-top: 5rem;
-  }
-
-  .header-container {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
 @media (max-width: 480px) {
   /* Adjustments for mobile phones */
+
+
   h1 {
     font-size: 1.5rem;
     margin-top: 2rem;
@@ -494,15 +424,53 @@ li {
   }
 
   .scrollable-container {
-    margin-top: 10vh;
-    flex-direction: column;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    bottom: -8vh;
+    max-height: 100vh;
+    display: grid;
+    gap: 10px; /* Gap between items */
+    padding: 3rem;
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal scrolling */
   }
 
+
   .scrollable-item {
-    height: 25vh;
-    width: 25vh;
-    margin-bottom: 1rem;
-    margin-right: 0;
+    border-radius: 10px;
+    box-shadow: 0px 3px 3px rgba(255, 255, 255, 0.048);
+    object-fit: cover;
+    transition: transform 0.2s ease, opacity 0.3s;
+  }
+
+  .video-id{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .scrollable-item:hover {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+
+  /* Ensure smooth scrolling */
+  .scrollable-container::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+
+  .scrollable-container::-webkit-scrollbar-thumb {
+    background-color: rgba(175, 160, 160, 0.3); /* Scrollbar thumb color */
+    border-radius: 10px; /* Rounded scrollbar thumb */
+  }
+
+  .scrollable-container::-webkit-scrollbar-track {
+    background: rgba(148, 138, 138, 0.1); /* Track color */
+  }
+
+  .text-overlay{
+    padding-bottom: 4vh;
   }
 
   #ContactPage {
@@ -524,9 +492,4 @@ li {
     flex-direction: row;
     align-items: center;
   }
-}
-
-#CollectionPage {
-  height: 100vh; /* Ensure the height allows for scrolling */
-  overflow-y: auto; /* Enable vertical scrolling */
 }
