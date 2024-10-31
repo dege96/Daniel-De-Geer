@@ -39,6 +39,15 @@ ContactTitle.addEventListener('click', (event) => {
   GlbWrapper.style.display = "none";
 });
 
+//storlek på bilder
+[Bild1, Bild2, Bild3].forEach(bild => {
+  bild.addEventListener('mouseover', () => {
+    gsap.to(bild, { scale: 1.05, duration: 0.5, ease: 'power3.out' });
+  });
+  bild.addEventListener('mouseout', () => {
+    gsap.to(bild, { scale: 1, duration: 0.5, ease: 'power3.out' });
+  });
+});
 
 /* document.addEventListener('DOMContentLoaded', function() {
   const titleElements = document.querySelectorAll('.header-container .title');
@@ -54,15 +63,70 @@ ContactTitle.addEventListener('click', (event) => {
 }); */
 
 function canSelect(){
-
-  const Bild2Accordion = document.querySelector('#Bild2Accordion');
   const Bild1Accordion = document.querySelector('#Bild1Accordion');
-
+  const Bild2Accordion = document.querySelector('#Bild2Accordion');
 }
 
 //Lägg till fler för varje bild
 Bild1.addEventListener('click', () => showThreeJS('Gun1.glb', 'Sniper Rifle', 20));
 Bild2.addEventListener('click', () => showThreeJS('Ship_Triangulated.glb', 'The Celestial Voyager', 10));
+
+class AccordionItem extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+customElements.define("accordion-item", AccordionItem);
+
+// Function to display the accordion content based on the clicked image
+function handleAccordionDisplay(clickedImage) {
+  const accordion1 = document.querySelector('#Bild1Accordion');
+  const accordion2 = document.querySelector('#Bild2Accordion');
+
+  // Hide all accordions initially
+  accordion1.style.display = 'none';
+  accordion2.style.display = 'none';
+
+  // Show the appropriate accordion based on the clicked image
+  if (clickedImage === 'bild1') {
+    accordion1.style.display = 'block';
+  } else if (clickedImage === 'bild2') {
+    accordion2.style.display = 'block';
+  }
+}
+
+// Click event listeners for images
+Bild1.addEventListener('click', () => handleAccordionDisplay('bild1'));
+Bild2.addEventListener('click', () => handleAccordionDisplay('bild2'));
+
+
+// Function to handle the display of accordion items
+function toggleAccordion(accordionIdToShow) {
+  // Get all accordion items
+  const allAccordions = document.querySelectorAll('.accordion-content');
+  
+  // Hide all accordion items
+  allAccordions.forEach(accordion => {
+    accordion.classList.remove('show');
+  });
+  
+  // Show the selected accordion item
+  const accordionToShow = document.getElementById(accordionIdToShow);
+  if (accordionToShow) {
+    accordionToShow.classList.add('show');
+  }
+}
+
+// Click event listeners for images
+Bild1.addEventListener('click', () => {
+  toggleAccordion('Bild1Accordion');
+});
+
+Bild2.addEventListener('click', () => {
+  toggleAccordion('Bild2Accordion');
+});
+
 
 //Lägger till glb beroende på bild klickad
 function showThreeJS(glbLocation, title, scale) {
@@ -74,8 +138,6 @@ function showThreeJS(glbLocation, title, scale) {
   console.log(ScaleSet);
   ElementLocation = glbLocation;
   document.querySelector('#loading').style.display = "block";
-  Bild1Accordion.classList.remove('show');
-  Bild2Accordion.classList.add('show');
   ThreeJS(ElementLocation, glbLocation, ScaleSet);
 }
 

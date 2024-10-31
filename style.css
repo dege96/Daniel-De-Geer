@@ -139,20 +139,11 @@ h3 {
   border-radius: 10px;
   box-shadow: 0px 3px 3px rgba(255, 255, 255, 0.048);
   object-fit: cover;
+  transition: transform 0.1s ease; /* Smooth transition */
 }
 
 .scrollable-item:last-child {
   margin-right: 0;
-}
-
-.scrollable-item:hover{
-  animation: SizeUp 1s;
-}
-
-@keyframes SizeUp {
-  0% { scale: 1; }
-  50% { scale: 1.051; }
-  100% { scale: 1; }
 }
 
 @keyframes fadeIn {
@@ -172,11 +163,12 @@ h3 {
 }
 
 #CollectionPage {
+  z-index: 2;
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: fadeIn 2s;
+
 }
 
 #ContactPage {
@@ -205,15 +197,19 @@ h3 {
       margin: 10px 0; /* add some margin to the text */
   }
 
-#GlbWrapper {
-  height: 100vh;
-  width: 100vw;
-  display: none;
-  transition: opacity 1s;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-}
+  #GlbWrapper {
+    position: fixed; /* Ensure it does not affect layout flow */
+    background: transparent; /* Transparent background */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    transition: opacity 1s;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
 
 * {
   margin: 10;
@@ -343,7 +339,10 @@ li {
   position: absolute;
   z-index: 1;
   cursor: default;
-}
+  border: none; 
+  outline: none;
+  box-shadow: none; 
+  }
 
 li {
   display: flex;
@@ -374,7 +373,7 @@ li {
 z-index: 0;
 position: absolute;
 width: 160vw;
-height: 100vh;
+height: 12vh;
 left: -30vw;
 top: 70vh;
 transform: rotate(-6deg) scale(1.5);
