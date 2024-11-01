@@ -1,4 +1,4 @@
-const CollectionTitle = document.querySelector('#CollectionTitle');
+const Button1 = document.querySelector('#Button1');
 const AboutTitle = document.querySelector('#AboutTitle');
 const ContactTitle = document.querySelector('#ContactTitle');
 const AboutPage = document.getElementById('AboutPage');
@@ -12,31 +12,12 @@ const Bild3 =  document.getElementById('bild3');
 const title = document.querySelector('#title');
 
 //Klicka collection title
-CollectionTitle.addEventListener('click', (event) => {
+Button1.addEventListener('click', (event) => {
   console.log('You clicked the Collection Title!');
   AboutPage.style.display = 'none';
-  ContactPage.style.display = 'none';
   CollectionPage.style.display = 'flex';
   GlbWrapper.style.display = "none";
   //ContactPage.classList.add('show');
-});
-
-//Klicka collection title
-AboutTitle.addEventListener('click', (event) => {
-  console.log('You clicked the About Title!');
-  ContactPage.style.display = 'none';
-  CollectionPage.style.display = 'none';
-  AboutPage.style.display = 'flex';
-  GlbWrapper.style.display = "none";
-});
-
-//Klicka contact title
-ContactTitle.addEventListener('click', (event) => {
-  console.log('You clicked the Contact Title!');
-  AboutPage.style.display = 'none';
-  CollectionPage.style.display = 'none';
-  ContactPage.style.display = 'flex';
-  GlbWrapper.style.display = "none";
 });
 
 //storlek på bilder
