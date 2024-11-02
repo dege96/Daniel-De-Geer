@@ -23,7 +23,7 @@ function canSelect(){
 
 //Lägg till fler för varje bild
 Bild1.addEventListener('click', () => showThreeJS('Gun1.glb', 'KOMMANDER 879', 20));
-Bild2.addEventListener('click', () => showThreeJS('SHIP_TRIANGULATED.GLB', 'THE CELESTIAL VOYAGER', 10));
+Bild2.addEventListener('click', () => showThreeJS('Ship_Triangulated.glb', 'THE CELESTIAL VOYAGER', 10));
 
 class AccordionItem extends HTMLElement {
   constructor() {
