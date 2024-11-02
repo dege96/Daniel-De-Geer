@@ -1,0 +1,286 @@
+@font-face {
+    font-family: 'Morn Bold Oblique';
+    src: url('Morn-BoldOblique.eot');
+    src: local('Morn Bold Oblique'), local('Morn-BoldOblique'),
+        url('Morn-BoldOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-BoldOblique.woff2') format('woff2'),
+        url('Morn-BoldOblique.woff') format('woff'),
+        url('Morn-BoldOblique.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Hairline';
+    src: url('Morn-Hairline.eot');
+    src: local('Morn Hairline'), local('Morn-Hairline'),
+        url('Morn-Hairline.eot?#iefix') format('embedded-opentype'),
+        url('Morn-Hairline.woff2') format('woff2'),
+        url('Morn-Hairline.woff') format('woff'),
+        url('Morn-Hairline.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Black Oblique';
+    src: url('Morn-BlackOblique.eot');
+    src: local('Morn Black Oblique'), local('Morn-BlackOblique'),
+        url('Morn-BlackOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-BlackOblique.woff2') format('woff2'),
+        url('Morn-BlackOblique.woff') format('woff'),
+        url('Morn-BlackOblique.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Demi';
+    src: url('Morn-DemiBold.eot');
+    src: local('Morn Demi Bold'), local('Morn-DemiBold'),
+        url('Morn-DemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Morn-DemiBold.woff2') format('woff2'),
+        url('Morn-DemiBold.woff') format('woff'),
+        url('Morn-DemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Extra Light Oblique';
+    src: url('Morn-ExtraLightOblique.eot');
+    src: local('Morn Extra Light Oblique'), local('Morn-ExtraLightOblique'),
+        url('Morn-ExtraLightOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-ExtraLightOblique.woff2') format('woff2'),
+        url('Morn-ExtraLightOblique.woff') format('woff'),
+        url('Morn-ExtraLightOblique.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Demi Bold Oblique';
+    src: url('Morn-DemiBoldOblique.eot');
+    src: local('Morn Demi Bold Oblique'), local('Morn-DemiBoldOblique'),
+        url('Morn-DemiBoldOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-DemiBoldOblique.woff2') format('woff2'),
+        url('Morn-DemiBoldOblique.woff') format('woff'),
+        url('Morn-DemiBoldOblique.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Extra';
+    src: url('Morn-ExtraLight.eot');
+    src: local('Morn Extra Light'), local('Morn-ExtraLight'),
+        url('Morn-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('Morn-ExtraLight.woff2') format('woff2'),
+        url('Morn-ExtraLight.woff') format('woff'),
+        url('Morn-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Hairline Oblique';
+    src: url('Morn-HairlineOblique.eot');
+    src: local('Morn Hairline Oblique'), local('Morn-HairlineOblique'),
+        url('Morn-HairlineOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-HairlineOblique.woff2') format('woff2'),
+        url('Morn-HairlineOblique.woff') format('woff'),
+        url('Morn-HairlineOblique.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn';
+    src: url('Morn-Bold.eot');
+    src: local('Morn Bold'), local('Morn-Bold'),
+        url('Morn-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Morn-Bold.woff2') format('woff2'),
+        url('Morn-Bold.woff') format('woff'),
+        url('Morn-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn';
+    src: url('Morn-Black.eot');
+    src: local('Morn Black'), local('Morn-Black'),
+        url('Morn-Black.eot?#iefix') format('embedded-opentype'),
+        url('Morn-Black.woff2') format('woff2'),
+        url('Morn-Black.woff') format('woff'),
+        url('Morn-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Thin Oblique';
+    src: url('Morn-ThinOblique.eot');
+    src: local('Morn Thin Oblique'), local('Morn-ThinOblique'),
+        url('Morn-ThinOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-ThinOblique.woff2') format('woff2'),
+        url('Morn-ThinOblique.woff') format('woff'),
+        url('Morn-ThinOblique.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Roman Variable';
+    src: url('MornVariable.eot');
+    src: local('Morn Roman Variable'), local('MornVariable'),
+        url('MornVariable.eot?#iefix') format('embedded-opentype'),
+        url('MornVariable.woff2') format('woff2'),
+        url('MornVariable.woff') format('woff'),
+        url('MornVariable.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn';
+    src: url('Morn-Medium.eot');
+    src: local('Morn Medium'), local('Morn-Medium'),
+        url('Morn-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Morn-Medium.woff2') format('woff2'),
+        url('Morn-Medium.woff') format('woff'),
+        url('Morn-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Medium Oblique';
+    src: url('Morn-MediumOblique.eot');
+    src: local('Morn Medium Oblique'), local('Morn-MediumOblique'),
+        url('Morn-MediumOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-MediumOblique.woff2') format('woff2'),
+        url('Morn-MediumOblique.woff') format('woff'),
+        url('Morn-MediumOblique.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Oblique Variable';
+    src: url('MornObliqueVariable.eot');
+    src: local('Morn Oblique Variable'), local('MornObliqueVariable'),
+        url('MornObliqueVariable.eot?#iefix') format('embedded-opentype'),
+        url('MornObliqueVariable.woff2') format('woff2'),
+        url('MornObliqueVariable.woff') format('woff'),
+        url('MornObliqueVariable.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn';
+    src: url('Morn-Thin.eot');
+    src: local('Morn Thin'), local('Morn-Thin'),
+        url('Morn-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Morn-Thin.woff2') format('woff2'),
+        url('Morn-Thin.woff') format('woff'),
+        url('Morn-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Ultra Bold Oblique';
+    src: url('Morn-UltraBoldOblique.eot');
+    src: local('Morn Ultra Bold Oblique'), local('Morn-UltraBoldOblique'),
+        url('Morn-UltraBoldOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-UltraBoldOblique.woff2') format('woff2'),
+        url('Morn-UltraBoldOblique.woff') format('woff'),
+        url('Morn-UltraBoldOblique.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Ultra';
+    src: url('Morn-UltraBold.eot');
+    src: local('Morn Ultra Bold'), local('Morn-UltraBold'),
+        url('Morn-UltraBold.eot?#iefix') format('embedded-opentype'),
+        url('Morn-UltraBold.woff2') format('woff2'),
+        url('Morn-UltraBold.woff') format('woff'),
+        url('Morn-UltraBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Oblique';
+    src: url('Morn-RegularOblique.eot');
+    src: local('Morn Oblique'), local('Morn-RegularOblique'),
+        url('Morn-RegularOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-RegularOblique.woff2') format('woff2'),
+        url('Morn-RegularOblique.woff') format('woff'),
+        url('Morn-RegularOblique.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn';
+    src: url('Morn-Light.eot');
+    src: local('Morn Light'), local('Morn-Light'),
+        url('Morn-Light.eot?#iefix') format('embedded-opentype'),
+        url('Morn-Light.woff2') format('woff2'),
+        url('Morn-Light.woff') format('woff'),
+        url('Morn-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn';
+    src: url('Morn-Regular.eot');
+    src: local('Morn'), local('Morn-Regular'),
+        url('Morn-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Morn-Regular.woff2') format('woff2'),
+        url('Morn-Regular.woff') format('woff'),
+        url('Morn-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Morn Light Oblique';
+    src: url('Morn-LightOblique.eot');
+    src: local('Morn Light Oblique'), local('Morn-LightOblique'),
+        url('Morn-LightOblique.eot?#iefix') format('embedded-opentype'),
+        url('Morn-LightOblique.woff2') format('woff2'),
+        url('Morn-LightOblique.woff') format('woff'),
+        url('Morn-LightOblique.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+

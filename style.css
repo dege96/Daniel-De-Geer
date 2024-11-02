@@ -62,6 +62,13 @@ hr{
   margin: 2vh;
 }
 
+.FlexCenterColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #DanielDeGeer{
   position: absolute;
   width: 60vw;        /* Full width of the screen */
@@ -84,7 +91,6 @@ hr{
   z-index: 100;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(0, 0, 0);
   background-image: url(simple-pre-loader/images/loader-128x/Preloader_6.gif);
   background-repeat: no-repeat;
   background-position: center;
@@ -100,21 +106,21 @@ h1 {
   margin-top: 5rem;
   font-size: 3rem;
   color: rgb(222, 222, 222);
-	font-family: 'Montserrat';
+	font-family: 'Morn';
 }
 
 h2 {
   margin-top: 1rem;
   font-size: 1rem;
   color: rgb(222, 222, 222);
-  font-family: 'Montserrat';
+  font-family: 'Morn';
 }
 
 h3 {
   margin-top: 2rem;
   font-size: 1rem;
   color: rgb(222, 222, 222);
-  font-family: 'Montserrat';
+  font-family: 'Morn';
 }
 
 .textbox1 {
@@ -173,7 +179,6 @@ h3 {
 
 #CollectionPage {
   z-index: 2;
-  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -191,7 +196,7 @@ h3 {
   padding: 20px;
   width: 300px;
   margin: 25vh auto;
-  font-family: "Montserrat";
+  font-family: "Morn";
   background: linear-gradient(#7fb2f0, #518dd6);
   border-radius: 20px;
   border: 1px solid #ffffff;
@@ -260,7 +265,7 @@ h3 {
 
 .top {
   color: white;
-  font-family: "Lato", sans-serif;
+  font-family: "Morn", sans-serif;
   justify-content: center;
   align-items: center;
 
@@ -379,33 +384,12 @@ li {
 }
 
 #Grid1{
-z-index: 0;
-position: absolute;
-width: 160vw;
-height: 12vh;
-left: -30vw;
-top: 70vh;
-transform: rotate(-6deg) scale(1.5);
-}
-
-.Button1 {
+  z-index: -1;
   position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  background-color: #518dd6;
-  border: 0.1rem solid #ffffff;
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
-  font-family: 'Montserrat';
+  width: 160vw;
+  height: 12vh;
+  left: -30vw;
+  top: 70vh;
+  transform: rotate(-6deg) scale(1.5);
+  pointer-events: none;
 }
-
-.Button1:hover {
-  background-color: #ffffff;
-  color: #518dd6;
-}
-

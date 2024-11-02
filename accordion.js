@@ -16,7 +16,7 @@ class Accordion extends HTMLElement {
         cursor: pointer;
         padding: 15px 15px 15px 42px;
         color: white;
-        font-family: "Lato", sans-serif;
+        font-family: "Morn", sans-serif;
         font-size: 1.5rem;
         border-bottom: 1px solid #CCC;
         position: relative;
@@ -26,30 +26,31 @@ class Accordion extends HTMLElement {
       .accordion li i { 
         z-index: 2;
         font-size: 1.5rem;
-        font-family: "Lato", sans-serif;
-        color: #595959;
+        font-family: "Morn", sans-serif;
+        color: white;
         transition: all 0.4s ease;
       }
       
       .submenu {
-        font-family: "Lato", sans-serif;
+        font-family: "Morn", sans-serif;
         transition: max-height 0.8s ease, opacity 0.8s ease;
         max-height: 0;
         overflow: hidden;
         opacity: 0;
+        color: white;
       }
       
       .submenu.open {
         display: block;
         max-height: 500px;
         opacity: 1;
-        color: #cecece;
+        color: white;
       }
       
       .submenu a {
         display: block;
         text-decoration: none;
-        color: #cecece;
+        color: white;
         padding-top: 12px;
         padding-bottom: 12px;
         transition: all 0.25s ease;

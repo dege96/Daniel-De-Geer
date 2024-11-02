@@ -1,24 +1,10 @@
-const Button1 = document.querySelector('#Button1');
-const AboutTitle = document.querySelector('#AboutTitle');
-const ContactTitle = document.querySelector('#ContactTitle');
-const AboutPage = document.getElementById('AboutPage');
 const CollectionPage = document.getElementById('CollectionPage');
-const ContactPage = document.getElementById('ContactPage');
 const GlbWrapper =  document.getElementById('GlbWrapper');
 
 const Bild1 =  document.getElementById('bild1');
 const Bild2 =  document.getElementById('bild2');
 const Bild3 =  document.getElementById('bild3');
 const title = document.querySelector('#title');
-
-//Klicka collection title
-Button1.addEventListener('click', (event) => {
-  console.log('You clicked the Collection Title!');
-  AboutPage.style.display = 'none';
-  CollectionPage.style.display = 'flex';
-  GlbWrapper.style.display = "none";
-  //ContactPage.classList.add('show');
-});
 
 //storlek på bilder
 [Bild1, Bild2, Bild3].forEach(bild => {
@@ -30,27 +16,14 @@ Button1.addEventListener('click', (event) => {
   });
 });
 
-/* document.addEventListener('DOMContentLoaded', function() {
-  const titleElements = document.querySelectorAll('.header-container .title');
-
-  titleElements.forEach(function(title) {
-    title.addEventListener('click', function() {
-      titleElements.forEach(function(el) {
-        el.classList.remove('active'); // Remove the active class from other titles
-      });
-      title.classList.add('active'); // Add the active class to the clicked title
-    });
-  });
-}); */
-
 function canSelect(){
   const Bild1Accordion = document.querySelector('#Bild1Accordion');
   const Bild2Accordion = document.querySelector('#Bild2Accordion');
 }
 
 //Lägg till fler för varje bild
-Bild1.addEventListener('click', () => showThreeJS('Gun1.glb', 'Sniper Rifle', 20));
-Bild2.addEventListener('click', () => showThreeJS('Ship_Triangulated.glb', 'The Celestial Voyager', 10));
+Bild1.addEventListener('click', () => showThreeJS('Gun1.glb', 'KOMMANDER 879', 20));
+Bild2.addEventListener('click', () => showThreeJS('SHIP_TRIANGULATED.GLB', 'THE CELESTIAL VOYAGER', 10));
 
 class AccordionItem extends HTMLElement {
   constructor() {
@@ -99,7 +72,7 @@ function toggleAccordion(accordionIdToShow) {
   }
 }
 
-// Click event listeners for images
+// Accordion shower depending on image clicked
 Bild1.addEventListener('click', () => {
   toggleAccordion('Bild1Accordion');
 });
@@ -111,42 +84,68 @@ Bild2.addEventListener('click', () => {
 
 //Lägger till glb beroende på bild klickad
 function showThreeJS(glbLocation, title, scale) {
+  console.log(`showThreeJS called with glbLocation: ${glbLocation}, title: ${title}, scale: ${scale}`);
   CollectionPage.style.display = 'none';
   GlbWrapper.style.display = 'block';
-  edit_title = document.getElementById("title")
+  const edit_title = document.getElementById("title");
   edit_title.textContent = title;
+  console.log(`edit_title.textContent set to ${title}`);
   ScaleSet = scale;
-  console.log(ScaleSet);
+  console.log(`ScaleSet set to ${scale}`);
   ElementLocation = glbLocation;
-  document.querySelector('#loading').style.display = "block";
+  console.log(`ElementLocation set to ${glbLocation}`);
+  
   ThreeJS(ElementLocation, glbLocation, ScaleSet);
+  console.log('Calling ThreeJS function');
 }
 
 function ThreeJS(element, SelectedElement, ScaleSet){
   async function main() {
+    console.log("Starting main function");
     const loader = new THREE.GLTFLoader();
-    // Ladda den första modellen
-    const gltf1 = await loader.loadAsync(element);
-    if (gltf1.scene) {
-      let Mesh1 = gltf1.scene;
-      Mesh1.scale.set(ScaleSet, ScaleSet, ScaleSet);
-      Mesh1.position.y = 0;
-      Mesh1.position.x = 0;
-      Mesh1.name = SelectedElement;
-      scene.add(Mesh1);
-      console.log(Mesh1);
-      const light = new THREE.PointLight(0xffffff, 1, 100);
-      light.position.set(0, 0, 10);
-      scene.add(light);
+    console.log("GLTFLoader initialized");
     
-    } else {
-      console.log('GLTF model not loaded');
+    try {
+      const gltf1 = await loader.loadAsync(element);
+      console.log("Model loaded successfully");
+      
+      if (gltf1.scene) {
+        let Mesh1 = gltf1.scene;
+        Mesh1.scale.set(ScaleSet, ScaleSet, ScaleSet);
+        console.log("Mesh scale set to:", ScaleSet);
+        
+        Mesh1.position.y = 0;
+        Mesh1.position.x = 0;
+        Mesh1.name = SelectedElement;
+        console.log("Mesh positioned and named:", SelectedElement);
+        
+        scene.add(Mesh1);
+        console.log("Mesh added to scene");
+        
+        const light = new THREE.PointLight(0xffffff, 1, 100);
+        light.position.set(0, 0, 10);
+        scene.add(light);
+        console.log("Point light added to scene");
+      
+      } else {
+        console.log('GLTF model not loaded');
+      }
+      
+    } catch (error) {
+      console.error("Error loading model:", error);
     }
-  
+    
     MakeBackgroundScene();
+    console.log("Background scene initialized");
+    
     setUpEventListeners();
+    console.log("Event listeners set up");
+    
     animate();
+    console.log("Animation started");
+    
     lights();
+    console.log("Lighting setup completed");
   }
   
   main();
@@ -190,17 +189,18 @@ function ThreeJS(element, SelectedElement, ScaleSet){
   
   //HDRi
   function MakeBackgroundScene(element){
-    new THREE.RGBELoader().load("./HDRI/MR_INT-001_NaturalStudio_NAD.hdr", function(texture){ 
+    new THREE.RGBELoader().load("./HDRI/lilienstein_2k.hdr", function(texture){ 
+      console.log("Texture loaded");
       texture.mapping = THREE.EquirectangularReflectionMapping;
       scene.background = null;
       scene.environment = texture;
-      console.log("Background set");
-      openingAnimation();
+
     });
   }
   
   //Ljussättning
   function lights(){
+    console.log("Setting up light sources");
     object = scene.children[1];
   
     //top of the object
@@ -208,33 +208,40 @@ function ThreeJS(element, SelectedElement, ScaleSet){
     topLight.position.set(object.position.x, object.position.y + 25, object.position.z);
     const helper1 = new THREE.DirectionalLightHelper( topLight, 1 );
     scene.add(topLight);
+    console.log("Top light added");
   
     //bottom of the object
     const bottomLight = new THREE.DirectionalLight(0xffffff, 0.1, 100);
     bottomLight.position.set(object.position.x, object.position.y, object.position.z+1);
     const helper2 = new THREE.DirectionalLightHelper( bottomLight, 1 );
     scene.add(bottomLight);
+    console.log("Bottom light added");
   
     //left of the object
     const leftLight = new THREE.SpotLight(0xADD8E6, 0.15);
     leftLight.position.set(object.position.x - 1335, object.position.y, object.position.z);
     scene.add(leftLight);
+    console.log("Left light added");
   
     //right of the object
     const rightLight = new THREE.SpotLight(0xffffff, 0.25);
     rightLight.position.set(object.position.x + 1335, object.position.y, object.position.z);
     scene.add(rightLight); 
+    console.log("Right light added");
   
     //front of the object
     const frontLight = new THREE.SpotLight(0xffffff, 0.5);
     frontLight.position.set(object.position.x, object.position.y, object.position.z + 1335);
     scene.add(frontLight); 
+    console.log("Front light added");
   
     //back of the object
     const backLight = new THREE.SpotLight(0xffffff, 0.15);
     backLight.position.set(object.position.x, object.position.y, object.position.z - 1335);
     scene.add(backLight);
+    console.log("Back light added");
   }
+
   
   //Funktion för alla event-listeners
   function setUpEventListeners() {
@@ -243,7 +250,7 @@ function ThreeJS(element, SelectedElement, ScaleSet){
       // Update sizes
       sizes.width = window.innerWidth;
       sizes.height = window.innerHeight;
-      console.log(sizes.width, sizes.height);
+      console.log(`Window resized to ${sizes.width}x${sizes.height}`);
   
       // Updatera kamera
       camera.aspect = sizes.width / sizes.height;
@@ -255,6 +262,7 @@ function ThreeJS(element, SelectedElement, ScaleSet){
     window.addEventListener( "pointermove", onPointerMove );
     window.addEventListener( "click", onClick );
     window.addEventListener( "keydown", (event) => {
+      console.log(`Key pressed: ${event.key}`);
     });
   
     console.log("Event listeners set up");
@@ -264,27 +272,46 @@ function ThreeJS(element, SelectedElement, ScaleSet){
   function onPointerMove(event) {
     mouse.x = (event.clientX / sizes.width) * 2 - 1;
     mouse.y = -(event.clientY / sizes.height) * 2 + 1;
+    
+    console.log(`Pointer moved: x=${mouse.x}, y=${mouse.y}`);
   
     if (isRaycasting) {
+      console.log("Raycasting in progress, skipping...");
       return;
     }
   
     isRaycasting = true;
+    console.log("Starting raycasting...");
+    
     mouseOn3DObject();
+    console.log("Checked mouse on 3D object");
+    
     changeProperties();
+    console.log("Changed properties based on raycast");
+    
     resetMouseOn3DObject();
+    console.log("Reset mouse on 3D object");
+    
     // Schemalägg nästa strålsändning om 50 millisekunder (för bättre prestanda)
     setTimeout(() => {
       isRaycasting = false;
+      console.log("Raycasting completed");
     }, 50);
   }
   
   function onClick(event) {
+    console.log("Clicked on the screen");
+    
     // Updatera raycaster
     raycaster.setFromCamera(mouse, camera);
+    console.log("Updated raycaster");
+    
     raycaster.params.Line.threshold = 1;
     const intersects = raycaster.intersectObjects(scene.children, true);
+    console.log(`Intersects length: ${intersects.length}`);
+    console.log("Clicked on: ", intersects);
     }
+
   
   // Funktion för att återställa musen när den är på objektet
   function resetMouseOn3DObject() {
@@ -293,26 +320,36 @@ function ThreeJS(element, SelectedElement, ScaleSet){
   
   // Funktion för att kontrollera om musen är på objektet
   function mouseOn3DObject() {
+    console.log("Running mouseOn3DObject()");
     raycaster.setFromCamera(mouse, camera);
     raycaster.params.Line.threshold = 1;
     const intersects = raycaster.intersectObjects(scene.children, true);
+    console.log(`Intersects length in mouseOn3DObject(): ${intersects.length}`);
     for (let i = 0; i < intersects.length; i++) {
       if (intersects[i].object.type === "Mesh") {
         onObject = true;
+        console.log("Mouse is on a mesh");
+      } else {
+        console.log("Mouse is not on a mesh");
       }
     }
+    console.log(`onObject value after mouseOn3DObject(): ${onObject}`);
   }
   
   function changeProperties() {
+    console.log("Running changeProperties()");
     // Skapa en tidslinje för objektanimering
     const tl = gsap.timeline({ defaults: { ease: "power3.easeInOut" } });
     if (onObject) {
       testCanvas.style.cursor = "pointer";
+      console.log("Mouse is on an object, scaling up");
       tl.to(scene.getObjectByName(SelectedElement).scale, {z:(ScaleSet*1.1), x:(ScaleSet*1.1), y:(ScaleSet*1.1), duration: 0.5});
     } else {
       testCanvas.style.cursor = "default";
+      console.log("Mouse is not on an object, scaling down");
       tl.to(scene.getObjectByName(SelectedElement).scale, {z:ScaleSet, x:ScaleSet, y:ScaleSet, duration: 0.5});
     }
+    console.log("Leaving changeProperties()");
   }
 
   function animateDisappear(currentObject, NoncurrentObject) {
@@ -338,13 +375,11 @@ function ThreeJS(element, SelectedElement, ScaleSet){
     }
   }
 
-  function openingAnimation() {
+  function removeLoading() {
     
     //Tar bort loading screen
-    document.querySelector('#loading').style.display = "none";
-  // Skapa en tidslinje för sidanimering
-    const mainPageTimeline = gsap.timeline({ defaults: { ease:Elastic.easeInOut } });
-    mainPageTimeline.to(".top", {y: 0, duration: 3});
+    //document.querySelector('#loading').style.display = "none";
+
   }
 
 
